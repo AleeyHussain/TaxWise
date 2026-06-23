@@ -1,5 +1,7 @@
 # TaxWise
 
+By **Ali Hussain** ([alihussainsinbox@gmail.com](mailto:alihussainsinbox@gmail.com))
+
 A small web app that helps someone pick the right tax software plan for their
 situation. You answer a short questionnaire, the app runs your answers through a
 rules engine, and it suggests a plan with the reasons spelled out. There is also
@@ -241,10 +243,18 @@ I used AI coding assistance (Claude) while building this.
   purpose and then implemented with assistance. The recommendation rules and
   their priority order were translated directly from the brief.
 - **How I reviewed it:** I wrote unit tests for the engine and the assistant
-  safety behaviour (31 tests) and ran them, did a production build to catch type
+  safety behaviour (35 tests) and ran them, did a production build to catch type
   errors, and tested every API route by hand including a live Groq call and the
   refund-guarantee safety case. I read through the generated code rather than
   taking it as-is, and adjusted the data flags and copy where needed.
 - **The AI feature itself:** the in-app assistant uses Groq's
   `llama-3.3-70b-versatile` model, grounded in the product data, with a
   deterministic rules-based fallback.
+
+## Author
+
+Ali Hussain - [alihussainsinbox@gmail.com](mailto:alihussainsinbox@gmail.com)
+
+The app runs locally with `npm install` then `npm run dev`. It is not deployed,
+so there is no live link. The repository contains everything needed to run and
+review it.
