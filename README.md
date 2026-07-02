@@ -255,6 +255,6 @@ I used AI coding assistance (Claude) while building this.
 
 Ali Hussain - [alihussainsinbox@gmail.com](mailto:alihussainsinbox@gmail.com)
 
-The app runs locally with `npm install` then `npm run dev`. It is not deployed,
-so there is no live link. The repository contains everything needed to run and
-review it.
+The app runs locally with `npm install` then `npm run dev`. It is also deployed
+on Vercel: https://tax-wise-nine.vercel.app/. The repository contains everything
+needed to run and review it.
