@@ -37,6 +37,12 @@ export default function AdminLayout({
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <Link
+              href="/admin/logout"
+              className="text-xs font-semibold text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 px-2 py-1"
+            >
+              Log out
+            </Link>
+            <Link
               href="/"
               className="text-xs font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
             >

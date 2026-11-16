@@ -2,20 +2,29 @@ import { NextResponse } from "next/server";
 import { questionnaireAnswersSchema } from "@/lib/validation/schemas";
 import { validateAnswers } from "@/features/recommend/validation";
 import { recommend } from "@/features/recommend/engine";
+import {
+  RATE_LIMIT_MAX_REQUESTS,
+  RATE_LIMIT_WINDOW_MS,
+} from "@/lib/constants";
+import {
+  readJsonBodyWithLimit,
+  validateRequestSecurity,
+} from "@/lib/security/guards";
 import type { QuestionnaireAnswers } from "@/types";
 
-export async function POST(request: Request) {
-  let body: unknown;
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json(
-      { errors: [{ field: "body", message: "Request body must be valid JSON." }] },
-      { status: 400 },
-    );
-  }
+const RATE_CONFIG = {
+  windowMs: RATE_LIMIT_WINDOW_MS,
+  maxRequests: RATE_LIMIT_MAX_REQUESTS,
+};
 
-  const parsed = questionnaireAnswersSchema.safeParse(body);
+export async function POST(request: Request) {
+  const securityError = validateRequestSecurity(request, RATE_CONFIG, "recommend");
+  if (securityError) return securityError;
+
+  const { data: rawBody, errorResponse } = await readJsonBodyWithLimit(request);
+  if (errorResponse) return errorResponse;
+
+  const parsed = questionnaireAnswersSchema.safeParse(rawBody);
   if (!parsed.success) {
     const errors = parsed.error.issues.map((issue) => ({
       field: issue.path.join(".") || "body",
@@ -24,11 +33,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ errors }, { status: 400 });
   }
 
-  const answers: QuestionnaireAnswers = parsed.data;
-  const errors = validateAnswers(answers);
-  if (errors.length > 0) {
-    return NextResponse.json({ errors }, { status: 400 });
-  }
+  try {
+    const answers: QuestionnaireAnswers = parsed.data;
+    const errors = validateAnswers(answers);
+    if (errors.length > 0) {
+      return NextResponse.json({ errors }, { status: 400 });
+    }
 
-  return NextResponse.json({ result: recommend(answers) });
+    return NextResponse.json({ result: recommend(answers) });
+  } catch (error) {
+    console.error("Recommend route error:", error);
+    return NextResponse.json({ error: "Something went wrong." }, { status: 500 });
+  }
 }
