@@ -30,11 +30,11 @@ export default function MobileNav({
     <AnimatePresence>
       {isOpen && (
         <motion.nav
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
-          className="overflow-hidden border-t border-slate-200 bg-white md:hidden dark:border-slate-800 dark:bg-slate-950"
+          className="overflow-hidden border-t border-subtle bg-surface md:hidden"
           aria-label="Mobile Navigation"
         >
           <div className="container-px flex flex-col py-3 space-y-1">
@@ -45,8 +45,8 @@ export default function MobileNav({
                 onClick={onClose}
                 className={`flex min-h-[44px] items-center rounded-xl px-4 text-sm font-semibold transition ${
                   isActive(item.href)
-                    ? "bg-blue-50 text-blue-900 dark:bg-blue-950/60 dark:text-blue-200"
-                    : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                    ? "bg-elevated text-trust font-bold"
+                    : "text-secondary hover:bg-elevated hover:text-primary"
                 }`}
               >
                 {item.label}

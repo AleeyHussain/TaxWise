@@ -1,92 +1,100 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { products } from "@/features/products/catalogue";
 import { formatPrice } from "@/lib/format";
+import { ChevronDown, User, Briefcase, Sparkles, Building2 } from "lucide-react";
+import type { ProductCategory } from "@/types";
+
+const CATEGORY_ICONS: Record<ProductCategory, React.ComponentType<{ className?: string }>> = {
+  personal: User,
+  "self-employed": Briefcase,
+  expert: Sparkles,
+  corporate: Building2,
+};
 
 export default function NavDropdown() {
   const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
-    >
-      <Link
-        href="/products"
-        className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition"
-        aria-expanded={open}
-        aria-haspopup="true"
-      >
-        Products
-      </Link>
+    <DropdownMenu.Root open={open} onOpenChange={setOpen}>
+      <DropdownMenu.Trigger asChild>
+        <button
+          type="button"
+          className="group relative flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-secondary hover:text-primary transition-colors focus-visible:outline-none"
+          aria-expanded={open}
+        >
+          <span>Products</span>
+          <ChevronDown
+            className={`h-4 w-4 transition-transform duration-200 ${
+              open ? "rotate-180 text-trust" : "text-secondary group-hover:text-primary"
+            }`}
+          />
+          <span className="absolute bottom-0 left-3 right-3 h-[2px] scale-x-0 bg-trust transition-transform duration-180 origin-left group-hover:scale-x-100" />
+        </button>
+      </DropdownMenu.Trigger>
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, scaleY: 0.95, y: -4 }}
-            animate={{ opacity: 1, scaleY: 1, y: 0 }}
-            exit={{ opacity: 0, scaleY: 0.95, y: -4 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            style={{ originY: 0 }}
-            className="absolute left-0 top-full z-50 mt-1 w-96 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl dark:border-slate-800 dark:bg-slate-900"
-          >
-            <div className="grid grid-cols-1 gap-1 max-h-[380px] overflow-y-auto pr-1">
-              {products.map((p) => (
-                <Link
-                  key={p.id}
-                  href="/products"
-                  onClick={() => setOpen(false)}
-                  className="group flex items-center justify-between rounded-xl p-2.5 transition hover:bg-slate-50 dark:hover:bg-slate-800/70"
-                >
-                  <div className="min-w-0 pr-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-blue-400">
-                        {p.name}
-                      </span>
-                      <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500 uppercase dark:bg-slate-800">
-                        {p.category}
-                      </span>
-                    </div>
-                    <p className="mt-0.5 text-xs text-slate-500 truncate dark:text-slate-400">
-                      {p.tagline}
-                    </p>
-                  </div>
-                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 shrink-0">
-                    {formatPrice(p.price)}
-                  </span>
-                </Link>
-              ))}
-            </div>
-
-            <div className="mt-2 border-t border-slate-100 pt-2 dark:border-slate-800">
-              <Link
-                href="/compare"
-                onClick={() => setOpen(false)}
-                className="block rounded-lg p-2 text-center text-xs font-semibold text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/40 transition"
+          <DropdownMenu.Portal forceMount>
+            <DropdownMenu.Content asChild sideOffset={10} align="start">
+              <motion.div
+                initial={{ opacity: 0, y: -8, scaleY: 0.96 }}
+                animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                exit={{ opacity: 0, y: -8, scaleY: 0.96 }}
+                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                style={{ originY: 0 }}
+                className="z-50 w-[420px] rounded-2xl border border-subtle bg-surface p-3 shadow-2xl backdrop-blur-md"
               >
-                Compare all 8 plans side-by-side &rarr;
-              </Link>
-            </div>
-          </motion.div>
+                <div className="grid grid-cols-1 gap-1 max-h-[400px] overflow-y-auto pr-1">
+                  {products.map((p) => {
+                    const Icon = CATEGORY_ICONS[p.category] || Sparkles;
+                    return (
+                      <DropdownMenu.Item key={p.id} asChild>
+                        <Link
+                          href={`/products#${p.id}`}
+                          onClick={() => setOpen(false)}
+                          className="group flex items-start gap-3 rounded-xl p-2.5 transition-all duration-150 hover:bg-elevated focus:bg-elevated focus:outline-none"
+                        >
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-base border border-subtle text-trust group-hover:border-trust/40">
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm font-bold text-primary group-hover:text-trust transition-colors">
+                                {p.name}
+                              </span>
+                              <span className="text-xs font-bold text-success">
+                                {formatPrice(p.price)}
+                              </span>
+                            </div>
+                            <p className="mt-0.5 text-xs text-secondary truncate">
+                              {p.tagline}
+                            </p>
+                          </div>
+                        </Link>
+                      </DropdownMenu.Item>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-2 border-t border-subtle pt-2">
+                  <Link
+                    href="/compare"
+                    onClick={() => setOpen(false)}
+                    className="block rounded-lg p-2 text-center text-xs font-semibold text-trust hover:bg-elevated transition-colors"
+                  >
+                    Compare all 8 plans side-by-side &rarr;
+                  </Link>
+                </div>
+              </motion.div>
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
         )}
       </AnimatePresence>
-    </div>
+    </DropdownMenu.Root>
   );
 }

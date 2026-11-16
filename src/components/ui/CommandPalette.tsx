@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
 import { products } from "@/features/products/catalogue";
+import { Search } from "lucide-react";
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -36,98 +37,86 @@ export default function CommandPalette() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 bg-slate-900/60 backdrop-blur-sm p-4 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 bg-black/60 backdrop-blur-xs p-4 animate-fade-in"
       onClick={() => setOpen(false)}
       role="dialog"
       aria-modal="true"
       aria-label="Command palette"
     >
       <div
-        className="w-full max-w-xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900"
+        className="w-full max-w-xl overflow-hidden rounded-2xl border border-subtle bg-surface shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <Command label="Global Command Menu" className="flex flex-col">
-          <div className="flex items-center border-b border-slate-200 px-4 dark:border-slate-800">
-            <svg
-              className="h-4 w-4 shrink-0 text-slate-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+          <div className="flex items-center border-b border-subtle px-4">
+            <Search className="h-4 w-4 shrink-0 text-secondary" />
             <Command.Input
               placeholder="Search plans, features, or jump to page..."
-              className="w-full bg-transparent px-3 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-slate-100"
+              className="w-full bg-transparent px-3 py-3.5 text-sm text-primary placeholder:text-secondary focus:outline-none"
               autoFocus
             />
-            <kbd className="hidden sm:inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+            <kbd className="hidden sm:inline-block rounded bg-elevated border border-subtle px-1.5 py-0.5 text-[10px] font-semibold text-secondary">
               ESC
             </kbd>
           </div>
 
           <Command.List className="max-h-80 overflow-y-auto p-2">
-            <Command.Empty className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+            <Command.Empty className="py-8 text-center text-sm text-secondary">
               No matching plans or pages found.
             </Command.Empty>
 
             <Command.Group
               heading="Quick Navigation"
-              className="px-2 py-1.5 text-xs font-semibold text-slate-400 dark:text-slate-500"
+              className="px-2 py-1.5 text-xs font-semibold text-secondary"
             >
               <Command.Item
                 onSelect={() => navigate("/recommend")}
-                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-primary hover:bg-elevated transition-colors"
               >
                 <span>Find my plan (Questionnaire)</span>
-                <span className="text-xs text-orange-600 dark:text-orange-400">Recommended</span>
+                <span className="text-xs font-semibold text-cta">Recommended</span>
               </Command.Item>
               <Command.Item
                 onSelect={() => navigate("/compare")}
-                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-primary hover:bg-elevated transition-colors"
               >
                 <span>Compare all plans</span>
-                <span className="text-xs text-slate-400">Side-by-side</span>
+                <span className="text-xs text-secondary">Side-by-side</span>
               </Command.Item>
               <Command.Item
                 onSelect={() => navigate("/products")}
-                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-primary hover:bg-elevated transition-colors"
               >
                 <span>Browse catalog</span>
-                <span className="text-xs text-slate-400">All 8 tiers</span>
+                <span className="text-xs text-secondary">All 8 tiers</span>
               </Command.Item>
               <Command.Item
                 onSelect={() => navigate("/assistant")}
-                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-primary hover:bg-elevated transition-colors"
               >
                 <span>Tax Assistant</span>
-                <span className="text-xs text-cyan-600 dark:text-cyan-400">AI Chat</span>
+                <span className="text-xs font-semibold text-ai">AI Chat</span>
               </Command.Item>
             </Command.Group>
 
             <Command.Group
               heading="Tax Plans"
-              className="mt-2 px-2 py-1.5 text-xs font-semibold text-slate-400 dark:text-slate-500"
+              className="mt-2 px-2 py-1.5 text-xs font-semibold text-secondary"
             >
               {products.map((prod) => (
                 <Command.Item
                   key={prod.id}
                   value={`${prod.name} ${prod.tagline} ${prod.bestFor}`}
                   onSelect={() => navigate(`/products#${prod.id}`)}
-                  className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                  className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-primary hover:bg-elevated transition-colors"
                 >
                   <div className="flex flex-col">
                     <span className="font-medium">{prod.name}</span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">
+                    <span className="text-xs text-secondary">
                       {prod.tagline}
                     </span>
                   </div>
-                  <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                  <span className="text-xs font-semibold text-success">
                     ${prod.price}
                   </span>
                 </Command.Item>

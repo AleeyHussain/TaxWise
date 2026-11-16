@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ThemeToggle from "@/components/layout/ThemeToggle";
-import { SparkleIcon } from "@/components/icons";
+import { Sparkles } from "lucide-react";
 
 export default function AdminLayout({
   children,
@@ -8,26 +8,26 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
+    <div className="min-h-screen bg-base text-primary">
+      <header className="sticky top-0 z-40 border-b border-subtle bg-surface/80 backdrop-blur-md">
         <div className="container-px flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <Link href="/admin" className="flex items-center gap-2 font-bold text-slate-900 dark:text-white">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-800 text-white dark:bg-slate-700">
-                <SparkleIcon className="h-5 w-5" />
+            <Link href="/admin" className="flex items-center gap-2 font-bold text-primary">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-trust text-white">
+                <Sparkles className="h-4 w-4" />
               </span>
               <span>TaxWise Admin</span>
             </Link>
             <nav className="flex items-center gap-2 text-sm font-medium">
               <Link
                 href="/admin"
-                className="rounded-lg px-3 py-1.5 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                className="rounded-lg px-3 py-1.5 text-secondary hover:bg-elevated hover:text-primary transition-colors"
               >
                 Dashboard
               </Link>
               <Link
                 href="/admin/products"
-                className="rounded-lg px-3 py-1.5 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                className="rounded-lg px-3 py-1.5 text-secondary hover:bg-elevated hover:text-primary transition-colors"
               >
                 Catalogue
               </Link>
@@ -38,19 +38,20 @@ export default function AdminLayout({
             <ThemeToggle />
             <Link
               href="/admin/logout"
-              className="text-xs font-semibold text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 px-2 py-1"
+              className="text-xs font-semibold text-danger hover:brightness-110 px-2 py-1 transition-colors"
             >
               Log out
             </Link>
             <Link
               href="/"
-              className="text-xs font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              className="text-xs font-medium text-secondary hover:text-primary transition-colors"
             >
               Exit to site &rarr;
             </Link>
           </div>
         </div>
       </header>
+
       <main>{children}</main>
     </div>
   );

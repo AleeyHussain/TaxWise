@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { SparkleIcon } from "@/components/icons";
+import { Sparkles } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -48,22 +48,22 @@ export default function AdminLoginPage() {
 
   return (
     <div className="container-px flex min-h-[75vh] flex-col items-center justify-center py-12">
-      <div className="card w-full max-w-md p-8 shadow-md animate-fade-in">
+      <div className="card w-full max-w-md p-8 shadow-md border-subtle bg-surface animate-fade-in">
         <div className="text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-slate-700">
-            <SparkleIcon className="h-6 w-6" />
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-trust text-white shadow-xs">
+            <Sparkles className="h-6 w-6" />
           </div>
-          <h1 className="mt-4 text-2xl font-bold text-slate-900 dark:text-white">
+          <h1 className="mt-4 text-2xl font-bold text-primary">
             Admin Sign In
           </h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-secondary">
             Enter your credentials to access the TaxWise administration panel.
           </p>
         </div>
 
         {error && (
           <div
-            className="mt-6 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-300"
+            className="mt-6 rounded-xl border border-danger/30 bg-danger/10 p-3 text-sm text-danger"
             role="alert"
           >
             {error}
@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
           <div>
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+              className="block text-sm font-medium text-primary"
             >
               Username
             </label>
@@ -93,7 +93,7 @@ export default function AdminLoginPage() {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+              className="block text-sm font-medium text-primary"
             >
               Password
             </label>
@@ -120,7 +120,7 @@ export default function AdminLoginPage() {
         <div className="mt-6 text-center">
           <Link
             href="/"
-            className="text-xs text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
+            className="text-xs text-secondary hover:text-primary transition-colors"
           >
             &larr; Return to public site
           </Link>

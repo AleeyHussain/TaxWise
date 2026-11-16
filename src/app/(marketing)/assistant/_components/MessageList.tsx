@@ -1,4 +1,7 @@
+"use client";
+
 import * as React from "react";
+import { motion } from "framer-motion";
 import { ChatMessage, type ChatMessageItem } from "./ChatMessage";
 
 export const EXAMPLES = [
@@ -22,10 +25,10 @@ export function MessageList({
   listEndRef: React.RefObject<HTMLDivElement>;
 }) {
   return (
-    <div className="card min-h-[340px] space-y-4 p-5 sm:p-6">
+    <div className="card min-h-[340px] space-y-4 p-5 sm:p-6 border-subtle">
       {messages.length === 0 ? (
-        <div className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
-          <p className="font-semibold text-slate-700 dark:text-slate-200">
+        <div className="py-8 text-center text-sm text-secondary">
+          <p className="font-semibold text-primary">
             No questions yet. Try one of these examples:
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -34,7 +37,7 @@ export function MessageList({
                 key={q}
                 type="button"
                 onClick={() => onSelectExample(q)}
-                className="badge badge-slate hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer text-left py-1.5 px-3"
+                className="badge badge-slate hover:bg-elevated hover:text-primary transition-colors cursor-pointer text-left py-1.5 px-3 border border-subtle"
               >
                 {q}
               </button>
@@ -46,11 +49,16 @@ export function MessageList({
       )}
 
       {loading && (
-        <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400" role="status">
+        <div className="flex items-center gap-2 text-sm text-secondary" role="status">
           <div className="flex items-center gap-1.5 py-1 px-2">
-            <span className="inline-block h-2 w-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse-dot" style={{ animationDelay: "0s" }} />
-            <span className="inline-block h-2 w-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse-dot" style={{ animationDelay: "0.2s" }} />
-            <span className="inline-block h-2 w-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse-dot" style={{ animationDelay: "0.4s" }} />
+            {[0, 0.2, 0.4].map((delay, idx) => (
+              <motion.span
+                key={idx}
+                animate={{ scale: [0.6, 1.2, 0.6], opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1.4, repeat: Infinity, delay, ease: "easeInOut" }}
+                className="inline-block h-2 w-2 rounded-full bg-ai"
+              />
+            ))}
           </div>
           <span className="sr-only">The assistant is thinking...</span>
           <span className="text-xs font-medium">Assistant is thinking...</span>

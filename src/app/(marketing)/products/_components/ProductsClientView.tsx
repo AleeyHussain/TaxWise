@@ -63,10 +63,10 @@ export default function ProductsClientView() {
   return (
     <div className="container-px py-12 md:py-16">
       <header className="max-w-2xl">
-        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+        <h1 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">
           Products
         </h1>
-        <p className="mt-3 text-slate-600 dark:text-slate-300 leading-relaxed">
+        <p className="mt-3 text-secondary leading-relaxed">
           Every plan we offer. Filter by type, sort by price, or search for a
           tax feature like &ldquo;rental&rdquo;, &ldquo;home office&rdquo;, or &ldquo;crypto&rdquo;.
         </p>
@@ -99,7 +99,7 @@ export default function ProductsClientView() {
             <ul
               id="search-suggestions"
               role="listbox"
-              className="absolute left-0 top-full z-30 mt-1.5 w-full rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl dark:border-slate-800 dark:bg-slate-900"
+              className="absolute left-0 top-full z-30 mt-1.5 w-full rounded-xl border border-subtle bg-surface p-1.5 shadow-xl"
             >
               {suggestions.map((s) => (
                 <li
@@ -110,10 +110,10 @@ export default function ProductsClientView() {
                     setQuery(s.label);
                     setComboboxOpen(false);
                   }}
-                  className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                  className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm text-primary hover:bg-elevated transition-colors"
                 >
                   <span className="font-medium">{s.label}</span>
-                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500 uppercase dark:bg-slate-800">
+                  <span className="rounded bg-elevated border border-subtle px-1.5 py-0.5 text-[10px] font-semibold text-secondary uppercase">
                     {s.type}
                   </span>
                 </li>
@@ -157,21 +157,21 @@ export default function ProductsClientView() {
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-4 text-sm text-secondary">
         Showing {visible.length} of {products.length} plans
       </p>
 
       {visible.length === 0 ? (
         <div className="card mt-6 flex flex-col items-center justify-center p-12 text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500 mb-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-elevated text-secondary border border-subtle mb-4">
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 className="text-base font-bold text-slate-900 dark:text-white">
+          <h3 className="text-base font-bold text-primary">
             No matching tax plans
           </h3>
-          <p className="mt-1.5 max-w-sm text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-1.5 max-w-sm text-sm text-secondary">
             No plans matched &ldquo;{query}&rdquo; with the selected filters.
           </p>
           <button

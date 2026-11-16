@@ -19,12 +19,13 @@
 
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.15;
-    @apply tracking-tight font-bold text-slate-900 dark:text-white;
+    color: var(--text-primary);
+    @apply tracking-tight font-bold;
   }
 
   :focus-visible {
     outline: none !important;
-    box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--trust-primary);
+    box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--trust);
   }
 }
 
@@ -46,7 +47,7 @@
   }
 
   .btn-primary {
-    background-color: var(--trust-primary);
+    background-color: var(--trust);
     color: #ffffff;
   }
   .btn-primary:hover {
@@ -54,15 +55,24 @@
   }
 
   .btn-secondary {
-    @apply border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800;
+    border: 1px solid var(--border-subtle);
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+  }
+  .btn-secondary:hover {
+    background-color: var(--bg-elevated);
   }
 
   .btn-ghost {
-    @apply text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800;
+    color: var(--text-secondary);
+  }
+  .btn-ghost:hover {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
   }
 
   .btn-cta {
-    background-color: var(--cta-color);
+    background-color: var(--cta);
     color: #ffffff;
   }
   .btn-cta:hover {
@@ -79,13 +89,13 @@
   /* Cards */
   .card {
     background-color: var(--bg-surface);
-    border-color: var(--border-color);
-    @apply rounded-2xl border shadow-sm transition-all duration-200;
+    border: 1px solid var(--border-subtle);
+    @apply rounded-2xl shadow-sm transition-all duration-200;
   }
   .card-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-    border-color: #cbd5e1;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.08);
+    border-color: var(--trust);
   }
 
   /* Badges */
@@ -94,30 +104,38 @@
   }
   .badge-brand {
     background-color: rgba(30, 58, 138, 0.1);
-    color: var(--trust-primary);
+    color: var(--trust);
   }
   .badge-slate {
-    @apply bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300;
+    background-color: var(--bg-elevated);
+    color: var(--text-secondary);
   }
   .badge-amber {
     background-color: rgba(217, 119, 6, 0.12);
-    color: var(--warning-color);
+    color: var(--warning);
   }
   .badge-ai {
     background-color: rgba(14, 116, 144, 0.12);
-    color: var(--ai-accent);
+    color: var(--ai);
   }
 
   /* Form controls */
   .input {
     min-height: 44px;
-    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition focus:border-blue-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    @apply w-full rounded-xl px-4 py-2.5 text-sm transition focus:border-trust;
+  }
+  .input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
   }
 
   /* Links with animated underline */
   .link {
     position: relative;
-    color: var(--trust-primary);
+    color: var(--trust);
     @apply font-semibold inline-block;
   }
   .link::after {
@@ -130,7 +148,7 @@
     left: 0;
     background-color: currentColor;
     transform-origin: bottom left;
-    transition: transform 0.2s ease-out;
+    transition: transform 0.18s ease-out;
   }
   .link:hover::after {
     transform: scaleX(1);
@@ -138,7 +156,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

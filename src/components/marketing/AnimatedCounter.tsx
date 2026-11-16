@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useMotionValue, animate } from "framer-motion";
+import { useInView, useMotionValue, animate, useReducedMotion } from "framer-motion";
 
 export default function AnimatedCounter({
   value,
@@ -16,10 +16,15 @@ export default function AnimatedCounter({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-20px" });
-  const [displayValue, setDisplayValue] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+  const [displayValue, setDisplayValue] = useState(shouldReduceMotion ? value : 0);
   const count = useMotionValue(0);
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      setDisplayValue(value);
+      return;
+    }
     if (inView) {
       const controls = animate(count, value, {
         duration,
@@ -30,7 +35,7 @@ export default function AnimatedCounter({
       });
       return () => controls.stop();
     }
-  }, [inView, count, value, duration]);
+  }, [inView, count, value, duration, shouldReduceMotion]);
 
   return (
     <span ref={ref} className="font-mono tabular-nums">

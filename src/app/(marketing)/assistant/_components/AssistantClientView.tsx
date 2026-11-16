@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { SparkleIcon } from "@/components/icons";
+import { Sparkles } from "lucide-react";
 import { ChatInput } from "./ChatInput";
 import { MessageList, EXAMPLES } from "./MessageList";
 import type { ChatMessageItem } from "./ChatMessage";
@@ -58,13 +58,13 @@ export default function AssistantClientView() {
       <div className="mx-auto max-w-3xl">
         <header className="mb-6">
           <span className="badge badge-ai mb-2 py-1 px-3">
-            <SparkleIcon className="h-3.5 w-3.5" />
+            <Sparkles className="h-3.5 w-3.5" />
             AI Grounded Assistant
           </span>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          <h1 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">
             Product Assistant
           </h1>
-          <p className="mt-2 text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="mt-2 text-secondary leading-relaxed">
             Ask about your situation in plain language. The assistant answers from
             the same product data and rules the rest of the site uses. It will not
             give tax, legal or financial advice.
@@ -92,7 +92,7 @@ export default function AssistantClientView() {
                 key={q}
                 type="button"
                 onClick={() => ask(q)}
-                className="badge badge-slate hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer"
+                className="badge badge-slate hover:bg-elevated hover:text-primary transition-colors cursor-pointer border border-subtle"
               >
                 {q}
               </button>

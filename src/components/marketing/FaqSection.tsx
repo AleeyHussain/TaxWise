@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import * as Accordion from "@radix-ui/react-accordion";
+import { Plus } from "lucide-react";
 
 const FAQ = [
   {
@@ -23,59 +23,37 @@ const FAQ = [
 ];
 
 export default function FaqSection() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
-
-  const toggle = (idx: number) => {
-    setOpenIdx((curr) => (curr === idx ? null : idx));
-  };
-
   return (
-    <section className="container-px py-16 md:py-24">
+    <section className="container-px py-16 md:py-24 border-t border-subtle">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl text-center">
+        <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl text-center">
           Frequently asked questions
         </h2>
-        <div className="mt-8 divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
-          {FAQ.map((item, idx) => {
-            const isOpen = openIdx === idx;
-            return (
-              <div key={item.q} className="py-4">
-                <button
-                  type="button"
-                  onClick={() => toggle(idx)}
-                  className="flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900 dark:text-white min-h-[44px]"
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-item-${idx}`}
-                >
-                  <span className="text-sm sm:text-base font-semibold">{item.q}</span>
-                  <span
-                    className={`shrink-0 text-slate-400 transition-transform duration-200 ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
-                  >
-                    +
-                  </span>
-                </button>
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      id={`faq-item-${idx}`}
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="overflow-hidden"
-                    >
-                      <p className="pt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                        {item.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-        </div>
+        <p className="mt-2 text-sm text-center text-secondary">
+          Common questions about the rules engine and recommendation criteria.
+        </p>
+
+        <Accordion.Root
+          type="single"
+          collapsible
+          className="mt-8 divide-y divide-subtle border-y border-subtle"
+        >
+          {FAQ.map((item, idx) => (
+            <Accordion.Item key={item.q} value={`item-${idx}`} className="py-2">
+              <Accordion.Header className="flex">
+                <Accordion.Trigger className="group flex w-full cursor-pointer items-center justify-between gap-4 py-3 text-left font-semibold text-primary transition-colors hover:text-trust focus-visible:outline-none min-h-[44px]">
+                  <span className="text-sm sm:text-base">{item.q}</span>
+                  <Plus className="h-4 w-4 shrink-0 text-secondary transition-transform duration-200 group-data-[state=open]:rotate-45" />
+                </Accordion.Trigger>
+              </Accordion.Header>
+              <Accordion.Content className="overflow-hidden transition-[height] duration-200 ease-out data-[state=open]:h-[var(--radix-accordion-content-height)] data-[state=closed]:h-0">
+                <p className="pb-4 pt-1 text-sm text-secondary leading-relaxed">
+                  {item.a}
+                </p>
+              </Accordion.Content>
+            </Accordion.Item>
+          ))}
+        </Accordion.Root>
       </div>
     </section>
   );

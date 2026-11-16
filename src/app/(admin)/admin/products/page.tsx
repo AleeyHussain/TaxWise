@@ -52,10 +52,10 @@ export default function AdminProductsPage() {
     <div className="container-px py-12">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-primary">
             Product configuration
           </h1>
-          <p className="mt-2 max-w-2xl text-slate-600 dark:text-slate-300">
+          <p className="mt-2 max-w-2xl text-secondary">
             A read-only view of the product catalogue that drives the whole app.
             Every plan, price and feature flag here is the same data the engine,
             comparison table and assistant read from.

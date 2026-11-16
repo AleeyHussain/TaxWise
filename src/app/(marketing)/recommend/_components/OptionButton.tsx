@@ -16,27 +16,27 @@ export function OptionButton({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition ${
+      className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition-all duration-180 min-h-[44px] ${
         selected
-          ? "border-brand-500 bg-brand-50 dark:border-brand-500 dark:bg-brand-900/20"
-          : "border-slate-200 bg-white hover:border-slate-300 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600"
+          ? "border-trust bg-trust/10 shadow-xs"
+          : "border-subtle bg-surface hover:border-trust/40 hover:bg-elevated"
       }`}
     >
       <span
-        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border-2 ${
+        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border-2 transition-colors ${
           multi ? "rounded-md" : "rounded-full"
         } ${
           selected
-            ? "border-brand-600 bg-brand-600 text-white"
-            : "border-slate-300 dark:border-slate-600"
+            ? "border-trust bg-trust text-white"
+            : "border-subtle bg-base"
         }`}
       >
         {selected && <span className="text-[11px] leading-none">&#10003;</span>}
       </span>
       <span>
-        <span className="block font-medium text-slate-900 dark:text-white">{label}</span>
+        <span className="block font-medium text-primary">{label}</span>
         {hint && (
-          <span className="mt-0.5 block text-sm text-slate-500 dark:text-slate-400">
+          <span className="mt-0.5 block text-sm text-secondary">
             {hint}
           </span>
         )}

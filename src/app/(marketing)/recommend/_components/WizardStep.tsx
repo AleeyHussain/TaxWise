@@ -63,7 +63,7 @@ export function WizardStep({
     <div className="space-y-4">
       {currentStep === "filing" && (
         <fieldset>
-          <legend className="text-lg font-semibold text-slate-900 dark:text-white">
+          <legend className="text-lg font-semibold text-primary">
             What are you filing for?
           </legend>
           <div className="mt-4 space-y-3">
@@ -82,10 +82,10 @@ export function WizardStep({
 
       {currentStep === "income" && (
         <fieldset>
-          <legend className="text-lg font-semibold text-slate-900 dark:text-white">
+          <legend className="text-lg font-semibold text-primary">
             Which income sources apply to you?
           </legend>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-secondary">
             Select all that apply.
             {answers.filingType === "incorporated" &&
               " This is optional for an incorporated company."}
@@ -106,10 +106,10 @@ export function WizardStep({
 
       {currentStep === "deductions" && (
         <fieldset>
-          <legend className="text-lg font-semibold text-slate-900 dark:text-white">
+          <legend className="text-lg font-semibold text-primary">
             Which deductions or expenses apply?
           </legend>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-secondary">
             Select all that apply, or pick &ldquo;No special deductions&rdquo;.
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -128,7 +128,7 @@ export function WizardStep({
 
       {currentStep === "help" && (
         <fieldset>
-          <legend className="text-lg font-semibold text-slate-900 dark:text-white">
+          <legend className="text-lg font-semibold text-primary">
             How much help do you want?
           </legend>
           <div className="mt-4 space-y-3">
@@ -147,7 +147,7 @@ export function WizardStep({
 
       {currentStep === "revenue" && (
         <fieldset>
-          <legend className="text-lg font-semibold text-slate-900 dark:text-white">
+          <legend className="text-lg font-semibold text-primary">
             Did the company have revenue?
           </legend>
           <div className="mt-4 space-y-3">

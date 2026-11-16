@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import NavDropdown from "./NavDropdown";
 
 const NAV_LINKS = [
@@ -20,31 +21,56 @@ export default function DesktopNav() {
   }
 
   return (
-    <nav className="hidden items-center gap-1 md:flex">
+    <nav className="hidden items-center gap-1 md:flex" aria-label="Main Navigation">
       <Link
         href="/"
-        className={`rounded-lg px-3 py-2 text-sm font-medium transition ${
-          isActive("/")
-            ? "bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200"
-            : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-        }`}
+        className="group relative px-3 py-2 text-sm font-medium transition-colors"
       >
-        Home
-      </Link>
-      <NavDropdown />
-      {NAV_LINKS.slice(1).map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          className={`rounded-lg px-3 py-2 text-sm font-medium transition ${
-            isActive(item.href)
-              ? "bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200"
-              : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+        {isActive("/") && (
+          <motion.div
+            layoutId="nav-active"
+            className="absolute inset-0 rounded-lg bg-elevated border border-subtle"
+            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+          />
+        )}
+        <span
+          className={`relative z-10 transition-colors ${
+            isActive("/") ? "text-trust font-bold" : "text-secondary hover:text-primary"
           }`}
         >
-          {item.label}
-        </Link>
-      ))}
+          Home
+        </span>
+        <span className="absolute bottom-1 left-3 right-3 h-[2px] scale-x-0 bg-trust transition-transform duration-180 origin-left group-hover:scale-x-100" />
+      </Link>
+
+      <NavDropdown />
+
+      {NAV_LINKS.slice(1).map((item) => {
+        const active = isActive(item.href);
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="group relative px-3 py-2 text-sm font-medium transition-colors"
+          >
+            {active && (
+              <motion.div
+                layoutId="nav-active"
+                className="absolute inset-0 rounded-lg bg-elevated border border-subtle"
+                transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              />
+            )}
+            <span
+              className={`relative z-10 transition-colors ${
+                active ? "text-trust font-bold" : "text-secondary hover:text-primary"
+              }`}
+            >
+              {item.label}
+            </span>
+            <span className="absolute bottom-1 left-3 right-3 h-[2px] scale-x-0 bg-trust transition-transform duration-180 origin-left group-hover:scale-x-100" />
+          </Link>
+        );
+      })}
     </nav>
   );
 }

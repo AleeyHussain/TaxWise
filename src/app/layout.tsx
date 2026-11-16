@@ -3,8 +3,9 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import PageTransition from "@/components/layout/PageTransition";
+import PageShell from "@/components/layout/PageShell";
 import CommandPalette from "@/components/ui/CommandPalette";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,19 +41,18 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="flex min-h-screen flex-col font-sans">
+      <body className="flex min-h-screen flex-col font-sans bg-base text-primary">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-xl focus:bg-blue-900 focus:px-4 focus:py-2.5 focus:text-white focus:shadow-lg focus:ring-2 focus:ring-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-xl focus:bg-trust focus:px-4 focus:py-2.5 focus:text-white focus:shadow-lg focus:ring-2 focus:ring-white"
         >
           Skip to main content
         </a>
         <Header />
-        <div className="flex-1">
-          <PageTransition>{children}</PageTransition>
-        </div>
+        <PageShell>{children}</PageShell>
         <Footer />
         <CommandPalette />
+        <Toaster position="bottom-right" richColors theme="system" />
       </body>
     </html>
   );
