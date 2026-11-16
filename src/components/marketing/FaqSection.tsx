@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 const FAQ = [
   {
     q: "How does the recommendation work?",
@@ -18,22 +23,58 @@ const FAQ = [
 ];
 
 export default function FaqSection() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  const toggle = (idx: number) => {
+    setOpenIdx((curr) => (curr === idx ? null : idx));
+  };
+
   return (
-    <section className="container-px py-16">
+    <section className="container-px py-16 md:py-24">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl text-center">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl text-center">
           Frequently asked questions
         </h2>
-        <div className="mt-8 divide-y divide-slate-200 dark:divide-slate-800">
-          {FAQ.map((item) => (
-            <details key={item.q} className="group py-4">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-slate-900 dark:text-white">
-                {item.q}
-                <span className="text-slate-400 transition group-open:rotate-45">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">{item.a}</p>
-            </details>
-          ))}
+        <div className="mt-8 divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+          {FAQ.map((item, idx) => {
+            const isOpen = openIdx === idx;
+            return (
+              <div key={item.q} className="py-4">
+                <button
+                  type="button"
+                  onClick={() => toggle(idx)}
+                  className="flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900 dark:text-white min-h-[44px]"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-item-${idx}`}
+                >
+                  <span className="text-sm sm:text-base font-semibold">{item.q}</span>
+                  <span
+                    className={`shrink-0 text-slate-400 transition-transform duration-200 ${
+                      isOpen ? "rotate-45" : ""
+                    }`}
+                  >
+                    +
+                  </span>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      id={`faq-item-${idx}`}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        {item.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

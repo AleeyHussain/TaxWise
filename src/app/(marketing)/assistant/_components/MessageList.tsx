@@ -22,17 +22,19 @@ export function MessageList({
   listEndRef: React.RefObject<HTMLDivElement>;
 }) {
   return (
-    <div className="card min-h-[300px] space-y-4 p-5">
+    <div className="card min-h-[340px] space-y-4 p-5 sm:p-6">
       {messages.length === 0 ? (
         <div className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
-          <p className="font-medium">No questions yet. Try one of these to get started:</p>
+          <p className="font-semibold text-slate-700 dark:text-slate-200">
+            No questions yet. Try one of these examples:
+          </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             {EXAMPLES.map((q) => (
               <button
                 key={q}
                 type="button"
                 onClick={() => onSelectExample(q)}
-                className="badge badge-slate hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+                className="badge badge-slate hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer text-left py-1.5 px-3"
               >
                 {q}
               </button>
@@ -44,12 +46,14 @@ export function MessageList({
       )}
 
       {loading && (
-        <div className="flex items-center gap-2 text-sm text-slate-400" role="status">
-          <span className="inline-block h-2 w-2 animate-bounce rounded-full bg-cyan-600" />
-          <span className="inline-block h-2 w-2 animate-bounce rounded-full bg-cyan-600 [animation-delay:0.2s]" />
-          <span className="inline-block h-2 w-2 animate-bounce rounded-full bg-cyan-600 [animation-delay:0.4s]" />
+        <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400" role="status">
+          <div className="flex items-center gap-1.5 py-1 px-2">
+            <span className="inline-block h-2 w-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse-dot" style={{ animationDelay: "0s" }} />
+            <span className="inline-block h-2 w-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse-dot" style={{ animationDelay: "0.2s" }} />
+            <span className="inline-block h-2 w-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse-dot" style={{ animationDelay: "0.4s" }} />
+          </div>
           <span className="sr-only">The assistant is thinking...</span>
-          <span>The assistant is thinking...</span>
+          <span className="text-xs font-medium">Assistant is thinking...</span>
         </div>
       )}
       <div ref={listEndRef} />
