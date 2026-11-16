@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Hero from "@/components/marketing/Hero";
 import PlanGrid from "@/components/marketing/PlanGrid";
+import PricingFaq from "@/components/marketing/PricingFaq";
+import Testimonials from "@/components/marketing/Testimonials";
 import HowItWorks from "@/components/marketing/HowItWorks";
 import FaqSection from "@/components/marketing/FaqSection";
 import FinalCta from "@/components/marketing/FinalCta";
@@ -16,6 +18,8 @@ export default function LandingPage() {
     <div>
       <Hero />
       <PlanGrid />
+      <PricingFaq />
+      <Testimonials />
       <HowItWorks />
       <FaqSection />
       <FinalCta />
