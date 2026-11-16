@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { questionnaireAnswersSchema } from "@/lib/validation/schemas";
 import { validateWizardStep, type WizardStepKey } from "@/features/recommend/step-validation";
+import { useQuestionnaireStorage, EMPTY_ANSWERS } from "./useQuestionnaireStorage";
 import type {
   Deduction,
   FilingType,
@@ -12,26 +14,16 @@ import type {
   RecommendationResult,
 } from "@/types";
 
-export const STORAGE_KEY = "taxwise:wizard";
-
-export const EMPTY_ANSWERS: QuestionnaireAnswers = {
-  filingType: null,
-  incomeSources: [],
-  deductions: [],
-  helpPreference: null,
-  companyHadRevenue: null,
-};
-
 export type StepKey = WizardStepKey;
 
 export function useQuestionnaire() {
-  const [answers, setAnswers] = useState<QuestionnaireAnswers>(EMPTY_ANSWERS);
+  const searchParams = useSearchParams();
+  const { answers, setAnswers, hydrated, clearStorage } = useQuestionnaireStorage();
   const [stepIndex, setStepIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<RecommendationResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
-  const [hydrated, setHydrated] = useState(false);
 
   const steps = useMemo<StepKey[]>(() => {
     const base: StepKey[] = ["filing", "income", "deductions", "help"];
@@ -42,35 +34,6 @@ export function useQuestionnaire() {
 
   const currentStep = steps[Math.min(stepIndex, steps.length - 1)];
   const inputSteps = steps.filter((s) => s !== "result");
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsedJson = JSON.parse(saved);
-        const validated = questionnaireAnswersSchema.safeParse(parsedJson);
-        if (validated.success) {
-          setAnswers({ ...EMPTY_ANSWERS, ...validated.data });
-        } else {
-          localStorage.removeItem(STORAGE_KEY);
-          setAnswers(EMPTY_ANSWERS);
-        }
-      }
-    } catch {
-      try {
-        localStorage.removeItem(STORAGE_KEY);
-      } catch {}
-      setAnswers(EMPTY_ANSWERS);
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
-    } catch {}
-  }, [answers, hydrated]);
 
   const fetchResult = useCallback(async (payload: QuestionnaireAnswers) => {
     setLoading(true);
@@ -97,6 +60,21 @@ export function useQuestionnaire() {
     }
   }, []);
 
+  useEffect(() => {
+    const encoded = searchParams.get("data");
+    if (!encoded) return;
+    try {
+      const decodedJson = atob(encoded);
+      const parsed = JSON.parse(decodedJson);
+      const validated = questionnaireAnswersSchema.safeParse(parsed);
+      if (validated.success) {
+        setAnswers(validated.data);
+        setStepIndex(steps.length - 1);
+        void fetchResult(validated.data);
+      }
+    } catch {}
+  }, [searchParams, steps.length, setAnswers, fetchResult]);
+
   function setFiling(value: FilingType) {
     setAnswers((prev) => ({
       ...prev,
@@ -122,15 +100,11 @@ export function useQuestionnaire() {
   function toggleDeduction(value: Deduction) {
     setAnswers((prev) => {
       const has = prev.deductions.includes(value);
-      if (value === "none") {
-        return { ...prev, deductions: has ? [] : ["none"] };
-      }
+      if (value === "none") return { ...prev, deductions: has ? [] : ["none"] };
       const withoutNone = prev.deductions.filter((v) => v !== "none");
       return {
         ...prev,
-        deductions: has
-          ? withoutNone.filter((v) => v !== value)
-          : [...withoutNone, value],
+        deductions: has ? withoutNone.filter((v) => v !== value) : [...withoutNone, value],
       };
     });
     setError(null);
@@ -168,14 +142,16 @@ export function useQuestionnaire() {
   }
 
   function restart() {
-    setAnswers(EMPTY_ANSWERS);
+    clearStorage();
     setResult(null);
     setApiError(null);
     setError(null);
     setStepIndex(0);
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {}
+  }
+
+  function applyScenario(updated: QuestionnaireAnswers) {
+    setAnswers(updated);
+    void fetchResult(updated);
   }
 
   return {
@@ -200,5 +176,6 @@ export function useQuestionnaire() {
     goBack,
     restart,
     fetchResult,
+    applyScenario,
   };
 }
