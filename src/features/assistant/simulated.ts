@@ -84,14 +84,40 @@ export function simulatedAnswer(question: string): AssistantResponse {
   const q = question.toLowerCase();
   const signals = parseSignals(question);
 
+  // Bug 3.9: off-topic / competitor check
+  const isCompetitorMention = /\bturbotax\b|h&r block|ufile|wealthsimple tax/.test(q);
+  const hasNoTaxSignals =
+    signals.answers.incomeSources.length === 0 &&
+    signals.answers.deductions.length === 0 &&
+    signals.answers.helpPreference === "self" &&
+    signals.answers.companyHadRevenue === null;
+
+  if (
+    (signals.mentionedProducts.length === 0 && hasNoTaxSignals) ||
+    (isCompetitorMention && hasNoTaxSignals)
+  ) {
+    return {
+      answer:
+        "I can only help with the plans on TaxWise. Could you tell me about your income, deductions, or which plan you're considering?",
+      recommendedProduct: null,
+      confidence: "low",
+      reasons: ["I can only help with the plans on TaxWise."],
+      disclaimer: DISCLAIMER,
+      source: "simulated",
+    };
+  }
+
+  // "Difference between A and B"
   if (/difference|compare|versus|\bvs\b/.test(q) && signals.mentionedProducts.length >= 2) {
     return differenceAnswer(signals.mentionedProducts[0], signals.mentionedProducts[1]);
   }
 
+  // "Can I use <product>?"
   if (/can i use|should i use|is .* (enough|ok|fine)|will .* work/.test(q) && signals.mentionedProducts.length >= 1) {
     return canUseAnswer(signals.mentionedProducts[0], signals);
   }
 
+  // Default: run the engine on the parsed situation.
   const rec = recommend(signals.answers);
   const product = getProductById(rec.recommendedProductId);
   const priceText = product ? ` ${product.name} ${formatAssistantPrice(product.price)}.` : "";

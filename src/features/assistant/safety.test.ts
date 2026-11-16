@@ -34,11 +34,20 @@ describe("assistant safety", () => {
     expect(screenUnsafe("Can I claim home-office expenses with Self-Employed?")).toBeNull();
   });
 
+  it("does not false-positive on 'certain' with medical deductions (Bug 3.8)", () => {
+    expect(screenUnsafe("I'm certain about my medical deductions, which plan?")).toBeNull();
+  });
+
   it("flags forbidden claims in model output", () => {
     expect(containsUnsafeClaim("You are guaranteed a refund.")).toBe(true);
     expect(containsUnsafeClaim("The tax authority will accept your return.")).toBe(true);
     expect(containsUnsafeClaim("You must use Premier.")).toBe(true);
     expect(containsUnsafeClaim("This is professional tax advice.")).toBe(true);
     expect(containsUnsafeClaim("Premier appears suitable for rental income.")).toBe(false);
+  });
+
+  it("does not match plain words containing authority substrings (Bug 3.4)", () => {
+    expect(containsUnsafeClaim("First, the information you need is here.")).toBe(false);
+    expect(containsUnsafeClaim("Craft your return carefully.")).toBe(false);
   });
 });

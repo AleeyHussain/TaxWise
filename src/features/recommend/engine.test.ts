@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { recommend } from "./engine";
+import { buildWarnings } from "./warnings";
 import type {
   Deduction,
   FilingType,
@@ -80,6 +81,50 @@ describe("recommendation engine - the scenarios from the brief", () => {
       answers({ filingType: "incorporated", companyHadRevenue: false }),
     );
     expect(r.recommendedProductId).toBe("nil-corporate-return");
+  });
+});
+
+describe("priority shadowing (Bug 3.1 & 3.2)", () => {
+  it("freelanceIncome + capitalGains -> Self-Employed with warning and Expert Assist upgrade", () => {
+    const r = recommend(
+      answers({ incomeSources: ["freelanceIncome", "capitalGains"] }),
+    );
+    expect(r.recommendedProductId).toBe("self-employed");
+    expect(r.warnings?.some((w) => w.includes("does not cover capital gains"))).toBe(true);
+    expect(r.optionalUpgrade?.productId).toBe("expert-assist");
+  });
+
+  it("freelanceIncome + foreignIncome -> Self-Employed with warning and Expert Assist upgrade", () => {
+    const r = recommend(
+      answers({ incomeSources: ["freelanceIncome", "foreignIncome"] }),
+    );
+    expect(r.recommendedProductId).toBe("self-employed");
+    expect(r.warnings?.some((w) => w.includes("does not cover foreign income"))).toBe(true);
+    expect(r.optionalUpgrade?.productId).toBe("expert-assist");
+  });
+
+  it("freelanceIncome + employmentExpenses -> Self-Employed with warning and Expert Assist upgrade", () => {
+    const r = recommend(
+      answers({
+        incomeSources: ["freelanceIncome"],
+        deductions: ["employmentExpenses"],
+      }),
+    );
+    expect(r.recommendedProductId).toBe("self-employed");
+    expect(r.warnings?.some((w) => w.includes("does not cover employment expenses"))).toBe(true);
+    expect(r.optionalUpgrade?.productId).toBe("expert-assist");
+  });
+
+  it("buildWarnings does not throw when incomeSources is undefined (Bug 3.2)", () => {
+    expect(() =>
+      buildWarnings({
+        filingType: "incorporated",
+        incomeSources: undefined as unknown as IncomeSource[],
+        deductions: [],
+        helpPreference: "self",
+        companyHadRevenue: true,
+      }),
+    ).not.toThrow();
   });
 });
 

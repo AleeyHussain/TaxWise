@@ -12,6 +12,7 @@ export type FeatureKey =
   | "rentalIncome"
   | "freelanceIncome"
   | "gigWorkIncome"
+  | "businessRevenue"
   | "businessExpenses"
   | "homeOfficeExpenses"
   | "vehicleExpenses"

@@ -14,6 +14,7 @@ export const NO_FEATURES: Supports = {
   rentalIncome: false,
   freelanceIncome: false,
   gigWorkIncome: false,
+  businessRevenue: false,
   businessExpenses: false,
   homeOfficeExpenses: false,
   vehicleExpenses: false,

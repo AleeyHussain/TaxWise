@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { questionnaireAnswersSchema } from "@/lib/validation/schemas";
+import { validateWizardStep, type WizardStepKey } from "@/features/recommend/step-validation";
 import type {
   Deduction,
   FilingType,
@@ -20,7 +22,7 @@ export const EMPTY_ANSWERS: QuestionnaireAnswers = {
   companyHadRevenue: null,
 };
 
-export type StepKey = "filing" | "income" | "deductions" | "help" | "revenue" | "result";
+export type StepKey = WizardStepKey;
 
 export function useQuestionnaire() {
   const [answers, setAnswers] = useState<QuestionnaireAnswers>(EMPTY_ANSWERS);
@@ -44,9 +46,21 @@ export function useQuestionnaire() {
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) setAnswers({ ...EMPTY_ANSWERS, ...JSON.parse(saved) });
+      if (saved) {
+        const parsedJson = JSON.parse(saved);
+        const validated = questionnaireAnswersSchema.safeParse(parsedJson);
+        if (validated.success) {
+          setAnswers({ ...EMPTY_ANSWERS, ...validated.data });
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+          setAnswers(EMPTY_ANSWERS);
+        }
+      }
     } catch {
-      // ignore unreadable storage
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {}
+      setAnswers(EMPTY_ANSWERS);
     }
     setHydrated(true);
   }, []);
@@ -55,9 +69,7 @@ export function useQuestionnaire() {
     if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
-    } catch {
-      // ignore storage failures
-    }
+    } catch {}
   }, [answers, hydrated]);
 
   const fetchResult = useCallback(async (payload: QuestionnaireAnswers) => {
@@ -134,29 +146,9 @@ export function useQuestionnaire() {
     setError(null);
   }
 
-  function validateStep(step: StepKey): string | null {
-    switch (step) {
-      case "filing":
-        return answers.filingType ? null : "Please choose what you are filing for.";
-      case "income":
-        if (answers.filingType !== "incorporated" && answers.incomeSources.length === 0) {
-          return "Please select at least one income source.";
-        }
-        return null;
-      case "help":
-        return answers.helpPreference ? null : "Please tell us how much help you want.";
-      case "revenue":
-        return answers.companyHadRevenue === null
-          ? "Please tell us whether the company had revenue."
-          : null;
-      default:
-        return null;
-    }
-  }
-
   function goNext() {
     if (loading) return;
-    const problem = validateStep(currentStep);
+    const problem = validateWizardStep(currentStep, answers);
     if (problem) {
       setError(problem);
       return;
@@ -183,9 +175,7 @@ export function useQuestionnaire() {
     setStepIndex(0);
     try {
       localStorage.removeItem(STORAGE_KEY);
-    } catch {
-      // ignore
-    }
+    } catch {}
   }
 
   return {

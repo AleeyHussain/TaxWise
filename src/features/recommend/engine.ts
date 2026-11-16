@@ -8,26 +8,24 @@ import type {
 } from "@/types";
 import { confidenceFromCount, labelFor, toSentenceList } from "./labels";
 import { buildWarnings } from "./warnings";
+import { expertReviewUpgrade, expertAssistShadowUpgrade } from "./upgrades";
 
-function expertReviewUpgrade(): OptionalUpgrade {
-  const expert = requireProduct("expert-assist");
-  return {
-    productId: expert.id,
-    productName: expert.name,
-    reason:
-      "If you would like a tax expert to look over your return before you file, Expert Assist adds expert chat and a review.",
-  };
-}
-
-function buildResult(
+function finalizeResult(
   productId: string,
   confidence: Confidence,
   reasons: string[],
   matchedInputs: string[],
-  warnings: string[],
-  optionalUpgrade?: OptionalUpgrade,
+  answers: QuestionnaireAnswers,
+  defaultUpgrade?: OptionalUpgrade,
 ): RecommendationResult {
   const product = requireProduct(productId);
+  const { warnings, unsupportedFeatures } = buildWarnings(answers, product);
+
+  let upgrade = defaultUpgrade;
+  if (unsupportedFeatures.length > 0 && productId !== "expert-assist" && productId !== "expert-full-service") {
+    upgrade = expertAssistShadowUpgrade();
+  }
+
   return {
     recommendedProductId: product.id,
     recommendedProductName: product.name,
@@ -35,21 +33,20 @@ function buildResult(
     confidence,
     reasons,
     matchedInputs,
-    optionalUpgrade,
+    optionalUpgrade: upgrade,
     warnings: warnings.length > 0 ? warnings : undefined,
     disclaimer: DISCLAIMER,
   };
 }
 
 export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
-  const warnings = buildWarnings(answers);
-  const income = new Set(answers.incomeSources);
-  const deductions = new Set(answers.deductions);
+  const income = new Set(answers.incomeSources ?? []);
+  const deductions = new Set(answers.deductions ?? []);
 
   // Rule 1: an incorporated company overrides every personal product.
   if (answers.filingType === "incorporated") {
     if (answers.companyHadRevenue === false) {
-      return buildResult(
+      return finalizeResult(
         "nil-corporate-return",
         "high",
         [
@@ -57,10 +54,10 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
           "Nil Corporate Return covers a no-revenue corporate filing.",
         ],
         ["incorporated", "noRevenue"],
-        warnings,
+        answers,
       );
     }
-    return buildResult(
+    return finalizeResult(
       "business-corporate",
       "high",
       [
@@ -68,13 +65,13 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
         "Business Corporate covers the corporate return, business revenue and business expenses.",
       ],
       ["incorporated"],
-      warnings,
+      answers,
     );
   }
 
   // Rule 2: wanting an expert to file outranks the self-file plans.
   if (answers.helpPreference === "expert_file") {
-    return buildResult(
+    return finalizeResult(
       "expert-full-service",
       "high",
       [
@@ -82,13 +79,13 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
         "Expert Full Service has a tax expert prepare and file the return for you.",
       ],
       ["expert_file"],
-      warnings,
+      answers,
     );
   }
 
   // Rule 3: wanting expert help while filing.
   if (answers.helpPreference === "expert_help") {
-    return buildResult(
+    return finalizeResult(
       "expert-assist",
       "high",
       [
@@ -96,7 +93,7 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
         "Expert Assist gives you expert chat, a video call and an expert review before you file.",
       ],
       ["expert_help"],
-      warnings,
+      answers,
     );
   }
 
@@ -126,12 +123,12 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
     reasons.push(
       "Self-Employed supports freelance, gig-work and business-related expenses.",
     );
-    return buildResult(
+    return finalizeResult(
       "self-employed",
       confidenceFromCount(selfEmployedMatches.length),
       reasons,
       selfEmployedMatches,
-      warnings,
+      answers,
       expertReviewUpgrade(),
     );
   }
@@ -145,7 +142,7 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
 
   if (premierMatches.length > 0) {
     const labelled = premierMatches.map(labelFor);
-    return buildResult(
+    return finalizeResult(
       "premier",
       confidenceFromCount(premierMatches.length),
       [
@@ -153,7 +150,7 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
         "Premier covers investment income, capital gains, foreign income and rental income.",
       ],
       premierMatches,
-      warnings,
+      answers,
       expertReviewUpgrade(),
     );
   }
@@ -166,7 +163,7 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
 
   if (deluxeMatches.length > 0) {
     const labelled = deluxeMatches.map(labelFor);
-    return buildResult(
+    return finalizeResult(
       "deluxe",
       confidenceFromCount(deluxeMatches.length),
       [
@@ -174,7 +171,7 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
         "Deluxe covers everyday deductions like medical expenses, donations and employment expenses.",
       ],
       deluxeMatches,
-      warnings,
+      answers,
       expertReviewUpgrade(),
     );
   }
@@ -191,12 +188,12 @@ export function recommend(answers: QuestionnaireAnswers): RecommendationResult {
   freeReasons.push(
     "Nothing in your answers needs a paid plan, so a simple Free return fits.",
   );
-  return buildResult(
+  return finalizeResult(
     "free",
     "medium",
     freeReasons,
     freeMatches,
-    warnings,
+    answers,
     {
       productId: "deluxe",
       productName: "Deluxe",

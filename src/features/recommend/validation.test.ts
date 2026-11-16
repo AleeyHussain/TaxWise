@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { validateAnswers } from "./validation";
+import { questionnaireAnswersSchema } from "@/lib/validation/schemas";
 import type { QuestionnaireAnswers } from "@/types/questionnaire";
 
 function answers(overrides: Partial<QuestionnaireAnswers> = {}): QuestionnaireAnswers {
@@ -36,5 +37,27 @@ describe("validation", () => {
       answers({ filingType: "incorporated", incomeSources: [], companyHadRevenue: true }),
     );
     expect(errors.some((e) => e.field === "incomeSources")).toBe(false);
+  });
+});
+
+describe("schema boundary validation (Bug 3.3)", () => {
+  it("rejects garbage income sources such as 'freeMoney'", () => {
+    const parsed = questionnaireAnswersSchema.safeParse({
+      filingType: "personal",
+      incomeSources: ["freeMoney"],
+      deductions: [],
+      helpPreference: "self",
+    });
+    expect(parsed.success).toBe(false);
+  });
+
+  it("accepts valid inputs and applies defaults", () => {
+    const parsed = questionnaireAnswersSchema.safeParse({
+      filingType: "personal",
+      incomeSources: ["salaryIncome"],
+      deductions: ["medicalExpenses"],
+      helpPreference: "self",
+    });
+    expect(parsed.success).toBe(true);
   });
 });

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { simulatedAnswer } from "./simulated";
+import { detectRevenue, neededFeaturesFrom } from "./signals";
 
 describe("simulated assistant grounding", () => {
   it("maps salary and donations to Deluxe", () => {
@@ -33,5 +34,57 @@ describe("simulated assistant grounding", () => {
     const r = simulatedAnswer("I want someone else to file for me. What should I select?");
     expect(r.recommendedProduct).toBe("Expert Full Service");
     expect(r.disclaimer).toMatch(/not tax, legal, or financial advice/i);
+  });
+});
+
+describe("logic bug regressions", () => {
+  it("corporate case adds corporateFiling / nilCorporateReturn in neededFeaturesFrom (Bug 3.5)", () => {
+    const withRevenue = neededFeaturesFrom({
+      filingType: "incorporated",
+      companyHadRevenue: true,
+      incomeSources: [],
+      deductions: [],
+      helpPreference: "self",
+    });
+    expect(withRevenue).toContain("corporateFiling");
+
+    const noRevenue = neededFeaturesFrom({
+      filingType: "incorporated",
+      companyHadRevenue: false,
+      incomeSources: [],
+      deductions: [],
+      helpPreference: "self",
+    });
+    expect(noRevenue).toContain("nilCorporateReturn");
+
+    const r = simulatedAnswer("I'm incorporated, can I use Free?");
+    expect(r.recommendedProduct).not.toBe("Free");
+    expect(r.answer.toLowerCase()).toMatch(/does not cover/);
+  });
+
+  it("mentions business revenue instead of freelance income (Bug 3.6)", () => {
+    const r = simulatedAnswer("I have business revenue, can I use Free?");
+    expect(r.answer.toLowerCase()).toMatch(/business revenue/);
+    expect(r.answer.toLowerCase()).not.toMatch(/freelance income/);
+  });
+
+  it("detectRevenue correctly recognizes negations (Bug 3.7)", () => {
+    expect(detectRevenue("We didn't have any revenue this year")).toBe(false);
+    expect(detectRevenue("There wasn't any revenue")).toBe(false);
+    expect(detectRevenue("We haven't made money")).toBe(false);
+    expect(detectRevenue("We have not had revenue")).toBe(false);
+    expect(detectRevenue("We had revenue of $50,000")).toBe(true);
+  });
+
+  it("returns off-topic fallback for questions without plans or signals (Bug 3.9)", () => {
+    const r1 = simulatedAnswer("Is TurboTax better than Free?");
+    expect(r1.recommendedProduct).toBeNull();
+    expect(r1.confidence).toBe("low");
+    expect(r1.answer).toMatch(/only help with the plans on TaxWise/i);
+
+    const r2 = simulatedAnswer("What is the weather today?");
+    expect(r2.recommendedProduct).toBeNull();
+    expect(r2.confidence).toBe("low");
+    expect(r2.answer).toMatch(/only help with the plans on TaxWise/i);
   });
 });

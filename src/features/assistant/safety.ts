@@ -7,16 +7,18 @@ export const SAFE_FALLBACK =
 export function screenUnsafe(question: string): AssistantResponse | null {
   const q = question.toLowerCase();
 
-  const certainty = /\b(guarantee|guaranteed|definitely|certain|certainly|for sure|promise|100%)\b/.test(q);
-  const outcomeWord = /(refund|outcome|result|approv|accept|qualif|deduct|money back|owe)/.test(q);
-  const asksForGuarantee =
-    (certainty && outcomeWord) ||
+  const outcomeNearCertainty =
+    /\b(definitely|certain|certainly|for sure)\b(?:\W+\w+){0,6}\W+\b(refund|outcome|result|approv(?:e|ed|al)?|accept(?:ed)?|qualif(?:y|ied)?|money back|owe)\b/.test(q);
+  const directGuarantee = /\b(guarantee|guaranteed|promise|100%)\b/.test(q);
+  const asksForRefundDirectly =
     /(will|can|do) i (definitely |still |even )?get (a |my )?(refund|money back)/.test(q);
+
+  const asksForGuarantee = outcomeNearCertainty || directGuarantee || asksForRefundDirectly;
 
   const asksWillAccept =
     /(will|does|can|is|are)\b/.test(q) &&
-    /(accept|approve)/.test(q) &&
-    /(cra|tax authority|tax office|government|irs|revenue canada|revenue agency|hmrc|ato)/.test(q);
+    /\b(accept|approve)\b/.test(q) &&
+    /\b(cra|tax authority|tax office|government|irs|revenue canada|revenue agency|hmrc|ato)\b/.test(q);
 
   const asksForAdvice =
     /(tax|legal|financial|accounting|professional) advice/.test(q) ||
@@ -46,7 +48,7 @@ export function containsUnsafeClaim(text: string): boolean {
     /you (are|will be) guaranteed/.test(t) ||
     /you definitely qualify/.test(t) ||
     /you (must|have to) use\b/.test(t) ||
-    /(cra|tax authority|the government|irs|revenue canada|hmrc|ato).{0,40}(accept|approve)/.test(t) ||
+    /\b(cra|tax authority|the government|irs|revenue canada|revenue agency|hmrc|ato)\b.{0,40}\b(accept|approve)/.test(t) ||
     /(will|shall) (definitely )?(accept|approve) your (return|filing)/.test(t) ||
     /this is (legal|professional tax|tax|financial|accounting) advice/.test(t)
   );

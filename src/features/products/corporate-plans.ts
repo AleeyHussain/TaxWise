@@ -19,7 +19,11 @@ export const corporatePlans: Product[] = [
       "Corporate filing review",
     ],
     notSupported: ["Personal tax return"],
-    supports: withFeatures("corporateFiling"),
+    supports: withFeatures(
+      "corporateFiling",
+      "businessRevenue",
+      "businessExpenses",
+    ),
   },
   {
     id: "nil-corporate-return",

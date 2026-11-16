@@ -61,8 +61,16 @@ export function detectDeductions(q: string): Deduction[] {
 }
 
 export function detectRevenue(q: string): boolean | null {
-  if (/no revenue|without revenue|\bnil\b|zero revenue|no income|had no revenue/.test(q)) return false;
-  if (/had revenue|with revenue|made (money|sales)|earned revenue|company.*revenue/.test(q)) return true;
+  if (
+    /no revenue|without revenue|\bnil\b|zero revenue|no income|had no revenue|didn'?t (have|make)|wasn'?t any|haven'?t (had|made)|have not had/.test(
+      q,
+    )
+  ) {
+    return false;
+  }
+  if (/had revenue|with revenue|made (money|sales)|earned revenue|company.*revenue/.test(q)) {
+    return true;
+  }
   return null;
 }
 
@@ -76,7 +84,7 @@ export function neededFeaturesFrom(answers: QuestionnaireAnswers): FeatureKey[] 
     rentalIncome: "rentalIncome",
     freelanceIncome: "freelanceIncome",
     gigWorkIncome: "gigWorkIncome",
-    businessRevenue: "freelanceIncome",
+    businessRevenue: "businessRevenue",
     foreignIncome: "foreignIncome",
   };
   const deductionToFeature: Partial<Record<Deduction, FeatureKey>> = {
@@ -97,6 +105,11 @@ export function neededFeaturesFrom(answers: QuestionnaireAnswers): FeatureKey[] 
   }
   if (answers.helpPreference === "expert_help") needs.add("expertHelp");
   if (answers.helpPreference === "expert_file") needs.add("fullService");
+
+  if (answers.filingType === "incorporated") {
+    needs.add(answers.companyHadRevenue === false ? "nilCorporateReturn" : "corporateFiling");
+  }
+
   return Array.from(needs);
 }
 

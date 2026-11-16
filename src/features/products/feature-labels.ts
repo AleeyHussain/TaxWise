@@ -14,6 +14,7 @@ export const FEATURE_LABELS: Record<FeatureKey, string> = {
   rentalIncome: "Rental income",
   freelanceIncome: "Freelance income",
   gigWorkIncome: "Gig-work income",
+  businessRevenue: "Business revenue",
   businessExpenses: "Business expenses",
   homeOfficeExpenses: "Home-office expenses",
   vehicleExpenses: "Vehicle expenses",
