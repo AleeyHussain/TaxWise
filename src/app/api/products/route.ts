@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
-import { products } from "@/data/products";
+import { products } from "@/features/products/catalogue";
 
-// GET /api/products -> the full catalogue.
+export const revalidate = 3600;
+
 export function GET() {
-  return NextResponse.json({ products });
+  return NextResponse.json(
+    { products },
+    {
+      headers: {
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    },
+  );
 }

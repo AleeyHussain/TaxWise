@@ -1,0 +1,97 @@
+import type { Product } from "@/types/product";
+import { withFeatures } from "./features";
+
+export const standardPlans: Product[] = [
+  {
+    id: "free",
+    name: "Free",
+    price: 0,
+    currency: "CAD",
+    category: "personal",
+    tagline: "A simple return at no cost.",
+    description:
+      "For a straightforward personal return with salary or student income and nothing unusual going on.",
+    bestFor: "Users with a simple personal tax situation.",
+    highlights: [
+      "Salary income",
+      "Student income",
+      "Basic personal return",
+      "Simple tax slips",
+    ],
+    notSupported: [
+      "Medical expenses",
+      "Donations",
+      "Investment income",
+      "Rental income",
+      "Self-employment income",
+      "Business income",
+      "Expert help",
+    ],
+    supports: withFeatures("salaryIncome", "studentIncome", "basicPersonalReturn"),
+  },
+  {
+    id: "deluxe",
+    name: "Deluxe",
+    price: 30,
+    currency: "CAD",
+    category: "personal",
+    tagline: "Cover the common deductions most people claim.",
+    description:
+      "Everything in Free, plus the everyday deductions like medical costs, donations and employment expenses.",
+    bestFor: "Users with common deductions and expenses.",
+    highlights: [
+      "Everything in Free",
+      "Medical expenses",
+      "Donations",
+      "Employment expenses",
+      "Family-related deductions",
+    ],
+    notSupported: [
+      "Investment income",
+      "Rental income",
+      "Self-employment income",
+      "Corporate tax filing",
+    ],
+    supports: withFeatures(
+      "salaryIncome",
+      "studentIncome",
+      "basicPersonalReturn",
+      "medicalExpenses",
+      "donations",
+      "employmentExpenses",
+      "familyDeductions",
+    ),
+  },
+  {
+    id: "premier",
+    name: "Premier",
+    price: 50,
+    currency: "CAD",
+    category: "personal",
+    tagline: "Built for investments, rentals and foreign income.",
+    description:
+      "Everything in Deluxe, plus investment income, capital gains, foreign income and rental income.",
+    bestFor: "Users with investments, rental income, capital gains, or foreign income.",
+    highlights: [
+      "Everything in Deluxe",
+      "Investment income",
+      "Capital gains",
+      "Foreign income",
+      "Rental income",
+    ],
+    notSupported: ["Self-employment income", "Corporate tax filing"],
+    supports: withFeatures(
+      "salaryIncome",
+      "studentIncome",
+      "basicPersonalReturn",
+      "medicalExpenses",
+      "donations",
+      "employmentExpenses",
+      "familyDeductions",
+      "investmentIncome",
+      "capitalGains",
+      "foreignIncome",
+      "rentalIncome",
+    ),
+  },
+];

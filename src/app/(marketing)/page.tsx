@@ -1,0 +1,24 @@
+import type { Metadata } from "next";
+import Hero from "@/components/marketing/Hero";
+import PlanGrid from "@/components/marketing/PlanGrid";
+import HowItWorks from "@/components/marketing/HowItWorks";
+import FaqSection from "@/components/marketing/FaqSection";
+import FinalCta from "@/components/marketing/FinalCta";
+
+export const metadata: Metadata = {
+  title: "TaxWise — The tax plan that actually fits your life",
+  description:
+    "Answer five questions. Get a plan matched to your income, deductions, and how much help you want — with the reasoning spelled out.",
+};
+
+export default function LandingPage() {
+  return (
+    <div>
+      <Hero />
+      <PlanGrid />
+      <HowItWorks />
+      <FaqSection />
+      <FinalCta />
+    </div>
+  );
+}

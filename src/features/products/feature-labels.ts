@@ -1,0 +1,24 @@
+import type { FeatureKey } from "@/types/product";
+
+export const FEATURE_LABELS: Record<FeatureKey, string> = {
+  salaryIncome: "Salary income",
+  studentIncome: "Student income",
+  basicPersonalReturn: "Basic personal return",
+  medicalExpenses: "Medical expenses",
+  donations: "Donations",
+  employmentExpenses: "Employment expenses",
+  familyDeductions: "Family deductions",
+  investmentIncome: "Investment income",
+  capitalGains: "Capital gains",
+  foreignIncome: "Foreign income",
+  rentalIncome: "Rental income",
+  freelanceIncome: "Freelance income",
+  gigWorkIncome: "Gig-work income",
+  businessExpenses: "Business expenses",
+  homeOfficeExpenses: "Home-office expenses",
+  vehicleExpenses: "Vehicle expenses",
+  expertHelp: "Expert help",
+  fullService: "Full service",
+  corporateFiling: "Corporate filing",
+  nilCorporateReturn: "Nil return",
+};
