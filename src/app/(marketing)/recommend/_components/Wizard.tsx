@@ -34,6 +34,7 @@ export function Wizard() {
     goBack,
     restart,
     fetchResult,
+    applyScenario,
   } = useQuestionnaire();
 
   const progress =
@@ -44,25 +45,25 @@ export function Wizard() {
   return (
     <div className="mx-auto max-w-2xl">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
           Find my plan
         </h1>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
-          A few quick questions and we will suggest the plan that fits best.
+          A few quick questions to match your income, deductions, and tax needs to the right plan.
         </p>
       </header>
 
       {/* Progress */}
       <div className="mb-8">
-        <div className="mb-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <div className="mb-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
           {steps.map((s, i) => (
             <span
               key={s}
               className={
                 i === stepIndex
-                  ? "text-brand-700 dark:text-brand-300"
+                  ? "text-blue-700 dark:text-blue-400"
                   : i < stepIndex
-                    ? "text-slate-700 dark:text-slate-200"
+                    ? "text-slate-800 dark:text-slate-200"
                     : ""
               }
             >
@@ -72,7 +73,7 @@ export function Wizard() {
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
           <div
-            className="h-full rounded-full bg-brand-600 transition-all duration-300"
+            className="h-full rounded-full bg-blue-700 transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -80,7 +81,7 @@ export function Wizard() {
 
       {/* Step body */}
       {currentStep !== "result" && (
-        <div className="card animate-fade-in p-6">
+        <div className="card animate-fade-in p-6 sm:p-8">
           <WizardStep
             currentStep={currentStep}
             answers={answers}
@@ -92,10 +93,10 @@ export function Wizard() {
           />
 
           {error && (
-            <p className="mt-4 text-sm font-medium text-red-600 dark:text-red-400">{error}</p>
+            <p className="mt-4 text-sm font-semibold text-red-600 dark:text-red-400">{error}</p>
           )}
 
-          <div className="mt-6 flex items-center justify-between">
+          <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6 dark:border-slate-800">
             <button
               type="button"
               onClick={goBack}
@@ -121,15 +122,21 @@ export function Wizard() {
       {currentStep === "result" && (
         <div>
           {loading && (
-            <div className="card p-10 text-center text-slate-500 dark:text-slate-400">
-              Working out your best fit...
+            <div className="card overflow-hidden p-6 sm:p-8 animate-pulse space-y-6">
+              <div className="h-12 w-3/4 rounded-xl bg-slate-200 dark:bg-slate-800" />
+              <div className="h-6 w-1/3 rounded-lg bg-slate-200 dark:bg-slate-800" />
+              <div className="space-y-3 pt-4">
+                <div className="h-4 w-full rounded bg-slate-200 dark:bg-slate-800" />
+                <div className="h-4 w-5/6 rounded bg-slate-200 dark:bg-slate-800" />
+                <div className="h-4 w-2/3 rounded bg-slate-200 dark:bg-slate-800" />
+              </div>
             </div>
           )}
 
           {!loading && apiError && (
             <div className="card p-8 text-center">
-              <p className="text-sm font-medium text-red-600 dark:text-red-400">{apiError}</p>
-              <div className="mt-4 flex justify-center gap-3">
+              <p className="text-sm font-semibold text-red-600 dark:text-red-400">{apiError}</p>
+              <div className="mt-5 flex justify-center gap-3">
                 <button type="button" onClick={goBack} className="btn btn-secondary">
                   Go back
                 </button>
@@ -145,7 +152,12 @@ export function Wizard() {
           )}
 
           {!loading && !apiError && result && (
-            <ResultView result={result} onRestart={restart} />
+            <ResultView
+              result={result}
+              answers={answers}
+              onRestart={restart}
+              onApplyScenario={applyScenario}
+            />
           )}
         </div>
       )}
