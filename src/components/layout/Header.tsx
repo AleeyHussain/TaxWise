@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { useScroll, useMotionValueEvent, useSpring, motion } from "framer-motion";
 import ThemePicker from "./ThemePicker";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 import Button from "@/components/ui/Button";
+import { Logo } from "@/components/branding/Logo";
 import { Search } from "lucide-react";
 
 export default function Header() {
@@ -38,25 +38,9 @@ export default function Header() {
       <div className="container-px flex h-full items-center justify-between gap-4">
         <Link
           href="/"
-          className="flex items-center gap-2.5 font-bold text-primary transition-transform duration-200 hover:scale-[1.02]"
+          className="flex items-center transition-transform duration-200 hover:scale-[1.02]"
         >
-          <span className="relative flex items-center justify-center">
-            <Image
-              src="/logo.svg"
-              alt="TaxWise logo"
-              width={isScrolled ? 26 : 30}
-              height={isScrolled ? 26 : 30}
-              className="transition-all duration-200"
-              priority
-            />
-          </span>
-          <span
-            className={`font-display tracking-tight transition-all duration-200 ${
-              isScrolled ? "text-lg font-bold" : "text-xl font-extrabold"
-            }`}
-          >
-            TaxWise
-          </span>
+          <Logo variant="full" size={isScrolled ? 28 : 32} />
         </Link>
 
         <DesktopNav />

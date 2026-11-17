@@ -30,13 +30,12 @@ export default function ProductCard({
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className={`group relative glass-2 rounded-2xl flex h-full flex-col justify-between p-6 transition-all duration-200 hover:shadow-xl hover:border-trust/40 ${
-        isRecommended
-          ? "border-ai/60 ring-2 ring-ai/40 shadow-md"
-          : isExpert
-            ? "border-premium/40"
-            : "border-subtle"
-      }`}
+      className={`group relative glass-2 rounded-2xl flex h-full flex-col justify-between p-6 transition-all duration-200 hover:shadow-xl hover:border-trust/40 ${isRecommended
+        ? "border-ai/60 ring-2 ring-ai/40 shadow-md"
+        : isExpert
+          ? "border-premium/40"
+          : "border-subtle"
+        }`}
     >
       {/* Recommended subtle pulse ring on border only */}
       {isRecommended && (
@@ -49,13 +48,12 @@ export default function ProductCard({
       <div>
         <div className="flex items-center justify-between gap-2">
           <span
-            className={`badge ${
-              isRecommended
-                ? "badge-ai"
-                : isExpert
-                  ? "badge-amber"
-                  : "badge-slate"
-            }`}
+            className={`badge ${isRecommended
+              ? "badge-ai"
+              : isExpert
+                ? "badge-amber"
+                : "badge-slate"
+              }`}
           >
             {isRecommended && <Sparkles className="h-3 w-3 mr-1" />}
             {CATEGORY_LABELS[product.category]}

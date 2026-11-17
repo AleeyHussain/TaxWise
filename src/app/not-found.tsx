@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/branding/Logo";
 
 export default function NotFound() {
   return (
     <div className="container-px flex min-h-[60vh] flex-col items-center justify-center py-16 text-center">
-      <div className="glass-2 max-w-md p-8 rounded-2xl">
+      <div className="glass-2 max-w-md p-8 rounded-2xl flex flex-col items-center">
+        <Logo size={44} variant="full" className="mb-4" />
         <span className="text-4xl font-extrabold text-trust">404</span>
         <h1 className="mt-2 text-2xl font-bold text-primary">
           Page not found
         </h1>
         <p className="mt-3 text-sm text-secondary leading-relaxed">
-          We couldn&apos;t find the page you&apos;re looking for. It may have moved or doesn&apos;t exist.
+          This page got lost in the paperwork. We couldn&apos;t find what you&apos;re looking for.
         </p>
         <div className="mt-6 flex justify-center gap-3">
           <Button asChild variant="primary">

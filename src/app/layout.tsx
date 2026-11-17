@@ -21,12 +21,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://taxwise.vercel.app"),
   title: "TaxWise — The tax plan that actually fits your life",
   description:
     "Answer five questions. Get a plan matched to your income, deductions, and how much help you want — with the reasoning spelled out.",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+  },
+  openGraph: {
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/twitter-card.png"],
   },
 };
 

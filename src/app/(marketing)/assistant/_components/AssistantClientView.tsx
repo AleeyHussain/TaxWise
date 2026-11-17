@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { LogoMark } from "@/components/branding/Logo";
 import { ChatInput } from "./ChatInput";
 import { MessageList, EXAMPLES } from "./MessageList";
 import type { ChatMessageItem } from "./ChatMessage";
@@ -57,8 +57,8 @@ export default function AssistantClientView() {
     <div className="container-px py-12 md:py-16">
       <div className="mx-auto max-w-3xl">
         <header className="mb-6">
-          <span className="badge badge-ai mb-2 py-1 px-3">
-            <Sparkles className="h-3.5 w-3.5" />
+          <span className="badge badge-ai mb-2 py-1 px-3 flex items-center gap-1.5 w-fit">
+            <LogoMark size={16} variant="icon-only" />
             AI Grounded Assistant
           </span>
           <h1 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">

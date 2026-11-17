@@ -1,12 +1,15 @@
 import Link from "next/link";
+import { Logo } from "@/components/branding/Logo";
 
 export default function Footer() {
   return (
     <footer className="mt-20 border-t border-subtle bg-surface">
       <div className="container-px flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between">
         <div className="max-w-sm">
-          <p className="font-extrabold text-primary text-lg">TaxWise</p>
-          <p className="mt-2 text-sm text-secondary leading-relaxed">
+          <Link href="/" className="inline-block">
+            <Logo variant="full" size={48} showTagline />
+          </Link>
+          <p className="mt-3 text-sm text-secondary leading-relaxed">
             The intelligent plan recommender for independent filers and business owners. Deterministic rules with AI explanation grounding.
           </p>
         </div>

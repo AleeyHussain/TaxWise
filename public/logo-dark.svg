@@ -1,20 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#18191E" />
-      <stop offset="100%" stop-color="#0D0E11" />
-    </linearGradient>
-    <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#22D3EE" />
-      <stop offset="100%" stop-color="#38BDF8" />
-    </linearGradient>
-  </defs>
-  <rect width="128" height="128" rx="28" fill="url(#bg)" />
-  <!-- Monogram T -->
-  <rect x="20" y="32" width="34" height="12" rx="3" fill="#60A5FA" />
-  <rect x="31" y="32" width="12" height="64" rx="3" fill="#60A5FA" />
-  <!-- Monogram W -->
-  <path d="M52 32 L63 96 H73 L83 54 L93 96 H103 L114 32 H101 L94 76 L85 38 H77 L68 76 L61 32 Z" fill="#60A5FA" />
-  <!-- Sparkle Accent -->
-  <path d="M106 16 L108.5 24.5 L117 27 L108.5 29.5 L106 38 L103.5 29.5 L95 27 L103.5 24.5 Z" fill="url(#sparkleGrad)" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <!-- Solid off-white badge for dark theme contexts -->
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#F8FAFC" />
+
+  <!-- Letters "TW" -->
+  <g fill="none" stroke="#0F172A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Letter T -->
+    <path d="M 24 44 L 56 44" />
+    <path d="M 40 44 L 40 86" />
+
+    <!-- Letter W with personality: middle dip + right leg lift -->
+    <path d="M 64 44 L 73 86 L 84 55 L 95 88 L 105 38" />
+  </g>
+
+  <!-- Sparkle star at top-right corner (12 units) -->
+  <path d="M 106 14 Q 106 20 100 20 Q 106 20 106 26 Q 106 20 112 20 Q 106 20 106 14 Z" fill="#0F172A" fill-opacity="0.9" />
 </svg>

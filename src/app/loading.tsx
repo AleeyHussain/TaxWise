@@ -1,19 +1,21 @@
-import { Skeleton } from "@/components/ui/Skeleton";
+"use client";
+
+import { motion } from "framer-motion";
+import { Logo } from "@/components/branding/Logo";
 
 export default function RootLoading() {
   return (
-    <div className="container-px py-16">
-      <div className="mx-auto max-w-4xl space-y-8">
-        <div className="space-y-3">
-          <Skeleton className="h-8 w-48" />
-          <Skeleton className="h-4 w-96 max-w-full" />
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Skeleton className="h-64 rounded-2xl" />
-          <Skeleton className="h-64 rounded-2xl" />
-          <Skeleton className="h-64 rounded-2xl" />
-        </div>
-      </div>
+    <div className="container-px flex min-h-[60vh] flex-col items-center justify-center py-16">
+      <motion.div
+        animate={{ scale: [1, 1.03, 1] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="flex flex-col items-center gap-3"
+      >
+        <Logo size={48} variant="full" />
+        <p className="text-xs font-medium text-secondary animate-pulse">
+          Loading TaxWise...
+        </p>
+      </motion.div>
     </div>
   );
 }

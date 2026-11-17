@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import { Logo } from "@/components/branding/Logo";
 import { Button } from "@/components/ui/Button";
 
 export default function AdminLoginPage() {
@@ -50,10 +50,8 @@ export default function AdminLoginPage() {
   return (
     <div className="container-px flex min-h-[75vh] flex-col items-center justify-center py-12">
       <div className="glass-2 w-full max-w-md p-8 shadow-md rounded-2xl animate-fade-in">
-        <div className="text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-trust text-white shadow-xs">
-            <Sparkles className="h-6 w-6" />
-          </div>
+        <div className="text-center flex flex-col items-center">
+          <Logo size={64} variant="full" />
           <h1 className="mt-4 text-2xl font-bold text-primary">
             Admin Sign In
           </h1>

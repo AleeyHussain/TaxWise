@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ThemePicker from "@/components/layout/ThemePicker";
-import { Sparkles } from "lucide-react";
+import { Logo } from "@/components/branding/Logo";
 
 export default function AdminLayout({
   children,
@@ -12,11 +12,11 @@ export default function AdminLayout({
       <header className="sticky top-0 z-40 border-b border-subtle bg-surface/80 backdrop-blur-md">
         <div className="container-px flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <Link href="/admin" className="flex items-center gap-2 font-bold text-primary">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-trust text-white">
-                <Sparkles className="h-4 w-4" />
+            <Link href="/admin" className="flex items-center gap-2.5 font-bold text-primary">
+              <Logo size={28} variant="full" />
+              <span className="rounded-md bg-elevated border border-border px-1.5 py-0.5 text-[11px] font-semibold text-secondary uppercase tracking-wider">
+                Admin
               </span>
-              <span>TaxWise Admin</span>
             </Link>
             <nav className="flex items-center gap-2 text-sm font-medium">
               <Link

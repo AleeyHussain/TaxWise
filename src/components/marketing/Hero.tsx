@@ -7,6 +7,7 @@ import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Clock } from "lucide-r
 import AnimatedCounter from "./AnimatedCounter";
 import FloatingMathBackground from "./FloatingMathBackground";
 import { Button } from "@/components/ui/Button";
+import { BotFaceSVG } from "@/components/BotCursor";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -126,6 +127,24 @@ export default function Hero() {
             </Link>{" "}
             a question.
           </motion.p>
+
+          {/* AI Bot Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.28, ease: EXPO_OUT }}
+            className="mt-8 mx-auto w-full max-w-[320px] glass-2 rounded-2xl p-4 text-center flex flex-col items-center gap-2.5 shadow-lg"
+          >
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-surface/80 border border-border shadow-inner">
+              <BotFaceSVG size={56} />
+            </div>
+            <p className="text-xs text-secondary leading-relaxed">
+              Your AI helper. Ask it anything about the plans.
+            </p>
+            <Button asChild variant="secondary" size="sm">
+              <Link href="/assistant">Ask the bot</Link>
+            </Button>
+          </motion.div>
 
           {/* Trust row */}
           <motion.div
