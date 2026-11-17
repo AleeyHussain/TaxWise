@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 export default function RootError({
   error,
@@ -16,7 +17,7 @@ export default function RootError({
 
   return (
     <div className="container-px flex min-h-[60vh] flex-col items-center justify-center py-16 text-center">
-      <div className="card max-w-md p-8 border-subtle bg-surface">
+      <div className="glass-2 max-w-md p-8 rounded-2xl">
         <h1 className="text-2xl font-bold text-primary">
           Something went wrong
         </h1>
@@ -24,12 +25,14 @@ export default function RootError({
           An unexpected error occurred while loading this page. You can try again or return home.
         </p>
         <div className="mt-6 flex justify-center gap-3">
-          <button type="button" onClick={() => reset()} className="btn btn-primary">
+          <Button type="button" onClick={() => reset()} variant="primary">
             Try again
-          </button>
-          <Link href="/" className="btn btn-secondary">
-            Return home
-          </Link>
+          </Button>
+          <Button asChild variant="secondary">
+            <Link href="/">
+              Return home
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

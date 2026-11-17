@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -28,13 +29,12 @@ export default function FinalCta() {
           transition={{ duration: 0.15 }}
           className="mt-3"
         >
-          <Link
-            href="/recommend"
-            className="btn bg-surface text-trust hover:bg-elevated btn-lg shadow-lg hover:shadow-xl transition-all duration-200"
-          >
-            Start the questionnaire
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          <Button asChild variant="cta" size="lg" className="shadow-lg hover:shadow-xl">
+            <Link href="/recommend">
+              Start the questionnaire
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
         </motion.div>
       </motion.div>
     </section>

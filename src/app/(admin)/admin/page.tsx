@@ -2,6 +2,7 @@ import Link from "next/link";
 import { products } from "@/features/products/catalogue";
 import { FEATURE_LABELS } from "@/features/products/feature-labels";
 import { SchemaCheckPanel } from "./_components/SchemaCheckPanel";
+import { Button } from "@/components/ui/Button";
 
 export default function AdminDashboardPage() {
   const isGroqConfigured = Boolean(process.env.GROQ_API_KEY);
@@ -19,13 +20,15 @@ export default function AdminDashboardPage() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Link href="/admin/products" className="btn btn-primary">
-            View Catalogue
-          </Link>
+          <Button asChild variant="primary">
+            <Link href="/admin/products">
+              View Catalogue
+            </Link>
+          </Button>
           <form action="/api/admin/logout" method="POST">
-            <button type="submit" className="btn btn-secondary">
+            <Button type="submit" variant="secondary">
               Sign out
-            </button>
+            </Button>
           </form>
         </div>
       </header>
@@ -37,7 +40,7 @@ export default function AdminDashboardPage() {
       />
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
-        <div className="card p-6 border-subtle bg-surface">
+        <div className="glass-1 p-6 rounded-2xl">
           <h2 className="text-lg font-bold text-primary">
             Environment & Integration Health
           </h2>
@@ -63,7 +66,7 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        <div className="card p-6 border-subtle bg-surface">
+        <div className="glass-1 p-6 rounded-2xl">
           <h2 className="text-lg font-bold text-primary">
             Quick Actions
           </h2>
@@ -71,12 +74,16 @@ export default function AdminDashboardPage() {
             Manage your product catalogue, inspect feature flags, and export configuration.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/admin/products" className="btn btn-secondary btn-sm">
-              Manage Products &rarr;
-            </Link>
-            <Link href="/" className="btn btn-ghost btn-sm">
-              Live Preview &rarr;
-            </Link>
+            <Button asChild variant="secondary" size="sm">
+              <Link href="/admin/products">
+                Manage Products &rarr;
+              </Link>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/">
+                Live Preview &rarr;
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

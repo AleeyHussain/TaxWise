@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CompareClientView from "./_components/CompareClientView";
+import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Compare Tax Plans — TaxWise",
@@ -26,12 +27,16 @@ export default function ComparePage() {
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Link href="/recommend" className="btn btn-primary">
-          Not sure? Find my plan
-        </Link>
-        <Link href="/products" className="btn btn-secondary">
-          View plan details
-        </Link>
+        <Button asChild variant="primary">
+          <Link href="/recommend">
+            Not sure? Find my plan
+          </Link>
+        </Button>
+        <Button asChild variant="secondary">
+          <Link href="/products">
+            View plan details
+          </Link>
+        </Button>
       </div>
     </div>
   );

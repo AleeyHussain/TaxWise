@@ -1,31 +1,6 @@
-:root {
-  --bg-base: #FAFAF9;
-  --bg-surface: #FFFFFF;
-  --bg-elevated: #F1F5F9;
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --border-subtle: #E2E8F0;
-  --trust: #1E3A8A;
-  --ai: #0E7490;
-  --success: #059669;
-  --premium: #B45309;
-  --cta: #EA580C;
-  --warning: #D97706;
-  --danger: #DC2626;
-}
-
-.dark {
-  --bg-base: #0D0E11;
-  --bg-surface: #18191E;
-  --bg-elevated: #212229;
-  --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --border-subtle: #1E293B;
-  --trust: #60A5FA;
-  --ai: #22D3EE;
-  --success: #34D399;
-  --premium: #FBBF24;
-  --cta: #FB923C;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-}
+@import "./themes/light.css";
+@import "./themes/dark.css";
+@import "./themes/ocean.css";
+@import "./themes/crimson.css";
+@import "./themes/rose.css";
+@import "./themes/aurora.css";

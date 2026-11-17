@@ -15,7 +15,22 @@
     background-color: var(--bg-base);
     color: var(--text-primary);
     line-height: 1.6;
+    position: relative;
+    min-height: 100vh;
     @apply antialiased tracking-normal;
+  }
+
+  /* Step 1: Background Gradient Mesh */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(60vw 60vw at 0% 0%, var(--mesh-primary) 0%, transparent 70%),
+      radial-gradient(70vw 70vw at 100% 100%, var(--mesh-secondary) 0%, transparent 70%),
+      radial-gradient(50vw 50vw at 50% 50%, var(--mesh-center) 0%, transparent 80%);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -26,7 +41,7 @@
 
   :focus-visible {
     outline: none !important;
-    box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--trust);
+    box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent-primary);
   }
 }
 
@@ -35,85 +50,20 @@
     @apply mx-auto w-full max-w-7xl px-6 md:px-8;
   }
 
-  /* Buttons */
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-150 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 min-h-[44px] min-w-[44px];
-  }
-  .btn:not(:disabled):hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-  .btn:not(:disabled):active {
-    transform: translateY(0);
-  }
-
-  .btn-primary {
-    background-color: var(--trust);
-    color: #ffffff;
-  }
-  .btn-primary:hover {
-    filter: brightness(0.92);
-  }
-
-  .btn-secondary {
-    border: 1px solid var(--border-subtle);
-    background-color: var(--bg-surface);
-    color: var(--text-primary);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  }
-  .btn-secondary:hover {
-    background-color: var(--bg-elevated);
-    border-color: var(--trust);
-    color: var(--trust);
-  }
-
-  .dark .btn-secondary {
-    border-color: rgba(255, 255, 255, 0.22);
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #F1F5F9;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  }
-  .dark .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.16);
-    border-color: var(--trust);
-    color: #ffffff;
-    box-shadow: 0 0 16px rgba(96, 165, 250, 0.25);
-  }
-
-  .btn-ghost {
-    color: var(--text-secondary);
-  }
-  .btn-ghost:hover {
-    background-color: var(--bg-elevated);
-    color: var(--text-primary);
-  }
-
-  .btn-cta {
-    background-color: var(--cta);
-    color: #ffffff;
-  }
-  .btn-cta:hover {
-    filter: brightness(0.92);
-  }
-
-  .btn-lg {
-    @apply px-6 py-3 text-base;
-  }
-  .btn-sm {
-    @apply px-3.5 py-1.5 text-xs;
-  }
-
-  /* Cards */
+  /* Cards - mapped to glass-1 */
   .card {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    @apply rounded-2xl shadow-sm transition-all duration-200;
+    background: var(--glass-bg-subtle);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border: 1px solid var(--glass-border-subtle);
+    box-shadow: 0 1px 2px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
+    @apply rounded-2xl transition-all duration-200;
   }
-  .card-hover:hover {
+  .card-hover:hover,
+  .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.08);
-    border-color: var(--trust);
+    box-shadow: 0 14px 28px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
+    border-color: var(--accent-primary);
   }
 
   /* Badges */
@@ -121,20 +71,24 @@
     @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
   }
   .badge-brand {
-    background-color: rgba(30, 58, 138, 0.1);
-    color: var(--trust);
+    background-color: var(--accent-primary-glow);
+    color: var(--accent-primary);
+    border: 1px solid var(--glass-border-subtle);
   }
   .badge-slate {
     background-color: var(--bg-elevated);
     color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
   }
   .badge-amber {
-    background-color: rgba(217, 119, 6, 0.12);
-    color: var(--warning);
+    background-color: rgba(217, 119, 6, 0.14);
+    color: var(--accent-premium);
+    border: 1px solid rgba(217, 119, 6, 0.25);
   }
   .badge-ai {
-    background-color: rgba(14, 116, 144, 0.12);
-    color: var(--ai);
+    background-color: rgba(14, 116, 144, 0.14);
+    color: var(--accent-ai);
+    border: 1px solid rgba(14, 116, 144, 0.25);
   }
 
   /* Form controls */
@@ -143,7 +97,7 @@
     background-color: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     color: var(--text-primary);
-    @apply w-full rounded-xl px-4 py-2.5 text-sm transition focus:border-trust;
+    @apply w-full rounded-xl px-4 py-2.5 text-sm transition focus:border-accent;
   }
   .input::placeholder {
     color: var(--text-secondary);
@@ -153,7 +107,7 @@
   /* Links with animated underline */
   .link {
     position: relative;
-    color: var(--trust);
+    color: var(--accent-primary);
     @apply font-semibold inline-block;
   }
   .link::after {

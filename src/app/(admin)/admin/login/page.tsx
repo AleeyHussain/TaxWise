@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -48,7 +49,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="container-px flex min-h-[75vh] flex-col items-center justify-center py-12">
-      <div className="card w-full max-w-md p-8 shadow-md border-subtle bg-surface animate-fade-in">
+      <div className="glass-2 w-full max-w-md p-8 shadow-md rounded-2xl animate-fade-in">
         <div className="text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-trust text-white shadow-xs">
             <Sparkles className="h-6 w-6" />
@@ -108,13 +109,14 @@ export default function AdminLoginPage() {
             />
           </div>
 
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="btn btn-primary w-full mt-2"
+            variant="primary"
+            className="w-full mt-2"
           >
             {loading ? "Signing in..." : "Sign In"}
-          </button>
+          </Button>
         </form>
 
         <div className="mt-6 text-center">

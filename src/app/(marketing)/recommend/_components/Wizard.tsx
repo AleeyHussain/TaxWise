@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { WizardStep } from "./WizardStep";
 import { ResultView } from "./ResultView";
 import { STEP_LABEL, STEP_VARIANTS } from "./wizard-constants";
+import { Button } from "@/components/ui/Button";
 
 export function Wizard() {
   const [direction, setDirection] = useState(1);
@@ -115,23 +116,23 @@ export function Wizard() {
           )}
 
           <div className="mt-8 flex items-center justify-between border-t border-subtle pt-6">
-            <button
+            <Button
               type="button"
               onClick={goBack}
               disabled={stepIndex === 0}
-              className="btn btn-ghost"
+              variant="ghost"
             >
               Back
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={goNext}
               disabled={loading}
-              className="btn btn-primary"
+              variant="primary"
             >
               {steps[stepIndex + 1] === "result" ? "See my recommendation" : "Next"}
               <ArrowRight className="h-4 w-4" />
-            </button>
+            </Button>
           </div>
         </div>
       )}
@@ -155,16 +156,16 @@ export function Wizard() {
             <div className="card p-8 text-center">
               <p className="text-sm font-semibold text-danger">{apiError}</p>
               <div className="mt-5 flex justify-center gap-3">
-                <button type="button" onClick={goBack} className="btn btn-secondary">
+                <Button type="button" onClick={goBack} variant="secondary">
                   Go back
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
                   onClick={() => fetchResult(answers)}
-                  className="btn btn-primary"
+                  variant="primary"
                 >
                   Try again
-                </button>
+                </Button>
               </div>
             </div>
           )}

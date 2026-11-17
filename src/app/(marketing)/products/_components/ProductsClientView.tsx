@@ -4,13 +4,9 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import ProductCard from "@/components/marketing/ProductCard";
 import { FEATURE_LABELS } from "@/features/products/feature-labels";
 import { products } from "@/features/products/catalogue";
-import {
-  searchableText,
-  CATEGORY_OPTIONS,
-  type CategoryFilter,
-  type SortOption,
-} from "@/features/products/search";
+import { searchableText, CATEGORY_OPTIONS, type CategoryFilter, type SortOption } from "@/features/products/search";
 import type { FeatureKey } from "@/types";
+import { Button } from "@/components/ui/Button";
 
 export default function ProductsClientView() {
   const [query, setQuery] = useState("");
@@ -174,17 +170,19 @@ export default function ProductsClientView() {
           <p className="mt-1.5 max-w-sm text-sm text-secondary">
             No plans matched &ldquo;{query}&rdquo; with the selected filters.
           </p>
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            size="sm"
             onClick={() => {
               setQuery("");
               setCategory("all");
               setSort("default");
             }}
-            className="btn btn-secondary btn-sm mt-5"
+            className="mt-5"
           >
             Reset all filters
-          </button>
+          </Button>
         </div>
       ) : (
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

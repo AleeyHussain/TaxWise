@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Button } from "@/components/ui/Button";
 
 export function ChatInput({
   input,
@@ -25,13 +26,14 @@ export function ChatInput({
         autoComplete="off"
         disabled={loading}
       />
-      <button
+      <Button
         type="submit"
         disabled={loading || !input.trim()}
-        className="btn btn-primary shrink-0"
+        variant="primary"
+        className="shrink-0"
       >
         Send
-      </button>
+      </Button>
     </form>
   );
 }

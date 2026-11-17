@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 import { formatPrice } from "@/lib/format";
 import type { Product, ProductCategory } from "@/types/product";
+import { Button } from "@/components/ui/Button";
 
 const CATEGORY_LABELS: Record<ProductCategory, string> = {
   personal: "Personal",
@@ -29,7 +30,7 @@ export default function ProductCard({
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className={`group relative card flex h-full flex-col justify-between p-6 transition-all duration-200 hover:shadow-xl hover:border-trust/40 ${
+      className={`group relative glass-2 rounded-2xl flex h-full flex-col justify-between p-6 transition-all duration-200 hover:shadow-xl hover:border-trust/40 ${
         isRecommended
           ? "border-ai/60 ring-2 ring-ai/40 shadow-md"
           : isExpert
@@ -87,13 +88,12 @@ export default function ProductCard({
       </div>
 
       <div className="mt-6 pt-2">
-        <Link
-          href={`/recommend`}
-          className="btn btn-secondary w-full text-xs font-semibold group-hover:border-trust/60 group-hover:text-trust transition-all duration-180"
-        >
-          <span>Choose plan</span>
-          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-180 group-hover:translate-x-1" />
-        </Link>
+        <Button asChild variant="secondary" size="sm" className="w-full text-xs font-semibold group-hover:border-trust/60 group-hover:text-trust">
+          <Link href="/recommend">
+            <span>Choose plan</span>
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-180 group-hover:translate-x-1" />
+          </Link>
+        </Button>
       </div>
     </motion.div>
   );

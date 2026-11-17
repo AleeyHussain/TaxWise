@@ -1,0 +1,56 @@
+:root,
+[data-theme="light"] {
+  --bg-base: #FAFAF9;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F1F5F9;
+  --bg-overlay: rgba(15, 23, 42, 0.45);
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #94A3B8;
+
+  --border-subtle: #E2E8F0;
+  --border-default: #CBD5E1;
+  --border-strong: #94A3B8;
+
+  --accent-primary: #1E3A8A;
+  --accent-primary-hover: #1E40AF;
+  --accent-primary-glow: rgba(30, 58, 138, 0.25);
+
+  --accent-ai: #0E7490;
+  --accent-ai-hover: #155E75;
+
+  --accent-success: #059669;
+  --accent-premium: #B45309;
+  --accent-cta: #EA580C;
+  --accent-cta-hover: #C2410C;
+
+  --glass-bg-subtle: rgba(255, 255, 255, 0.65);
+  --glass-bg: rgba(255, 255, 255, 0.80);
+  --glass-bg-elevated: rgba(241, 245, 249, 0.85);
+  --glass-bg-overlay: rgba(255, 255, 255, 0.94);
+
+  --glass-border-subtle: rgba(226, 232, 240, 0.7);
+  --glass-border: rgba(226, 232, 240, 0.9);
+  --glass-border-strong: rgba(203, 213, 225, 0.95);
+
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+
+  --shadow-color: rgba(15, 23, 42, 0.08);
+  --shadow-color-light: rgba(15, 23, 42, 0.04);
+
+  --mesh-primary: rgba(30, 58, 138, 0.08);
+  --mesh-secondary: rgba(234, 88, 12, 0.07);
+  --mesh-center: rgba(14, 116, 144, 0.06);
+
+  --noise-opacity: 0.02;
+
+  /* Legacy compatibility aliases */
+  --trust: var(--accent-primary);
+  --ai: var(--accent-ai);
+  --success: var(--accent-success);
+  --premium: var(--accent-premium);
+  --cta: var(--accent-cta);
+  --warning: var(--accent-premium);
+  --danger: #DC2626;
+}

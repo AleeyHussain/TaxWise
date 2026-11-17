@@ -10,6 +10,7 @@ import { formatPrice } from "@/lib/format";
 import { exportRecommendationPdf } from "@/features/recommend/export-pdf";
 import ScenarioModal from "./ScenarioModal";
 import ResultActionButtons from "./ResultActionButtons";
+import { Button } from "@/components/ui/Button";
 import type { RecommendationResult, QuestionnaireAnswers } from "@/types";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
@@ -67,11 +68,7 @@ export function ResultView({
           <div className="flex flex-wrap items-center justify-between gap-3">
             <ConfidenceBadge confidence={result.confidence} />
             <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={handleCopyLink}
-                className="btn btn-secondary btn-sm"
-              >
+              <Button type="button" onClick={handleCopyLink} variant="secondary" size="sm">
                 <AnimatePresence mode="wait" initial={false}>
                   {copied ? (
                     <motion.span
@@ -97,26 +94,23 @@ export function ResultView({
                     </motion.span>
                   )}
                 </AnimatePresence>
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 onClick={() => {
                   exportRecommendationPdf(result);
                   toast.success("Summary PDF generated!");
                 }}
-                className="btn btn-secondary btn-sm"
+                variant="secondary"
+                size="sm"
               >
                 <Download className="h-3.5 w-3.5" />
                 <span>Download summary (PDF)</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setScenarioOpen(true)}
-                className="btn btn-secondary btn-sm"
-              >
+              </Button>
+              <Button type="button" onClick={() => setScenarioOpen(true)} variant="secondary" size="sm">
                 <SlidersHorizontal className="h-3.5 w-3.5" />
                 <span>&ldquo;What if?&rdquo; Scenarios</span>
-              </button>
+              </Button>
             </div>
           </div>
 

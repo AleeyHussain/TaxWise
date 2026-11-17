@@ -1,0 +1,55 @@
+[data-theme="aurora"] {
+  --bg-base: #0B0F19;
+  --bg-surface: #141A2E;
+  --bg-elevated: #1D2642;
+  --bg-overlay: rgba(5, 7, 13, 0.75);
+
+  --text-primary: #FDF2F8;
+  --text-secondary: #F472B6;
+  --text-tertiary: #A5F3FC;
+
+  --border-subtle: #2A3558;
+  --border-default: #EC4899;
+  --border-strong: #06B6D4;
+
+  --accent-primary: #EC4899;
+  --accent-primary-hover: #F472B6;
+  --accent-primary-glow: rgba(236, 72, 153, 0.35);
+
+  --accent-ai: #06B6D4;
+  --accent-ai-hover: #22D3EE;
+
+  --accent-success: #10B981;
+  --accent-premium: #A855F7;
+  --accent-cta: #06B6D4;
+  --accent-cta-hover: #22D3EE;
+
+  --glass-bg-subtle: rgba(20, 26, 46, 0.65);
+  --glass-bg: rgba(20, 26, 46, 0.80);
+  --glass-bg-elevated: rgba(29, 38, 66, 0.85);
+  --glass-bg-overlay: rgba(20, 26, 46, 0.94);
+
+  --glass-border-subtle: rgba(236, 72, 153, 0.15);
+  --glass-border: rgba(6, 182, 212, 0.25);
+  --glass-border-strong: rgba(236, 72, 153, 0.35);
+
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+
+  --shadow-color: rgba(5, 7, 13, 0.65);
+  --shadow-color-light: rgba(5, 7, 13, 0.4);
+
+  --mesh-primary: rgba(236, 72, 153, 0.10);
+  --mesh-secondary: rgba(6, 182, 212, 0.09);
+  --mesh-center: rgba(168, 85, 247, 0.08);
+
+  --noise-opacity: 0.04;
+
+  /* Legacy compatibility aliases */
+  --trust: var(--accent-primary);
+  --ai: var(--accent-ai);
+  --success: var(--accent-success);
+  --premium: var(--accent-premium);
+  --cta: var(--accent-cta);
+  --warning: var(--accent-premium);
+  --danger: #EF4444;
+}

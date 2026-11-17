@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { getProductById } from "@/features/products/catalogue";
+import { Button } from "@/components/ui/Button";
 
 const PREVIEW_IDS = ["free", "deluxe", "self-employed", "expert-full-service"];
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
@@ -55,9 +56,11 @@ export default function PlanGrid() {
         </div>
 
         <div className="mt-8 sm:hidden">
-          <Link href="/products" className="btn btn-secondary w-full">
-            See all 8 plans
-          </Link>
+          <Button asChild variant="secondary" className="w-full">
+            <Link href="/products">
+              See all 8 plans
+            </Link>
+          </Button>
         </div>
       </motion.div>
     </section>

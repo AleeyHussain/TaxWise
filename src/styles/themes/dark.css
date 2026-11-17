@@ -1,0 +1,56 @@
+.dark,
+[data-theme="dark"] {
+  --bg-base: #0D0E11;
+  --bg-surface: #18191E;
+  --bg-elevated: #212229;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
+
+  --border-subtle: #1E293B;
+  --border-default: #334155;
+  --border-strong: #475569;
+
+  --accent-primary: #60A5FA;
+  --accent-primary-hover: #93C5FD;
+  --accent-primary-glow: rgba(96, 165, 250, 0.3);
+
+  --accent-ai: #22D3EE;
+  --accent-ai-hover: #67E8F9;
+
+  --accent-success: #34D399;
+  --accent-premium: #FBBF24;
+  --accent-cta: #FB923C;
+  --accent-cta-hover: #FDBA74;
+
+  --glass-bg-subtle: rgba(24, 25, 30, 0.65);
+  --glass-bg: rgba(24, 25, 30, 0.80);
+  --glass-bg-elevated: rgba(33, 34, 41, 0.85);
+  --glass-bg-overlay: rgba(24, 25, 30, 0.94);
+
+  --glass-border-subtle: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.18);
+
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-color-light: rgba(0, 0, 0, 0.3);
+
+  --mesh-primary: rgba(96, 165, 250, 0.08);
+  --mesh-secondary: rgba(251, 146, 60, 0.07);
+  --mesh-center: rgba(34, 211, 238, 0.06);
+
+  --noise-opacity: 0.035;
+
+  /* Legacy compatibility aliases */
+  --trust: var(--accent-primary);
+  --ai: var(--accent-ai);
+  --success: var(--accent-success);
+  --premium: var(--accent-premium);
+  --cta: var(--accent-cta);
+  --warning: var(--accent-premium);
+  --danger: #EF4444;
+}

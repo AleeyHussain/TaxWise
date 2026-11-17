@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ThemeToggle from "@/components/layout/ThemeToggle";
+import ThemePicker from "@/components/layout/ThemePicker";
 import { Sparkles } from "lucide-react";
 
 export default function AdminLayout({
@@ -35,7 +35,7 @@ export default function AdminLayout({
           </div>
 
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            <ThemePicker />
             <Link
               href="/admin/logout"
               className="text-xs font-semibold text-danger hover:brightness-110 px-2 py-1 transition-colors"

@@ -103,25 +103,25 @@ export default function FloatingBotAvatar({
         {/* Robot Face & Eyes */}
         <div className="relative flex flex-col items-center justify-center">
           {/* Eyes Visor */}
-          <div className="flex items-center gap-2 rounded-full bg-black/40 px-2 py-1 border border-white/20">
+          <div className="flex items-center gap-2 rounded-full bg-overlay px-2 py-1 border border-border">
             {/* Left Eye */}
             <div className="relative h-2.5 w-2.5 rounded-full bg-ai flex items-center justify-center shadow-xs">
               <motion.div
                 style={{ x: eyeOffset.x, y: eyeOffset.y }}
-                className="h-1 w-1 rounded-full bg-white"
+                className="h-1 w-1 rounded-full bg-[var(--glass-highlight)]"
               />
             </div>
             {/* Right Eye */}
             <div className="relative h-2.5 w-2.5 rounded-full bg-ai flex items-center justify-center shadow-xs">
               <motion.div
                 style={{ x: eyeOffset.x, y: eyeOffset.y }}
-                className="h-1 w-1 rounded-full bg-white"
+                className="h-1 w-1 rounded-full bg-[var(--glass-highlight)]"
               />
             </div>
           </div>
 
           {/* Smile line */}
-          <div className="mt-1 h-0.5 w-3 rounded-full bg-white/70" />
+          <div className="mt-1 h-0.5 w-3 rounded-full bg-[var(--glass-highlight)]/70" />
         </div>
 
         {/* Online Indicator Badge */}

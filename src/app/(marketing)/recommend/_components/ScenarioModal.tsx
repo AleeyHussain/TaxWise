@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { QuestionnaireAnswers, IncomeSource, HelpPreference } from "@/types";
+import { Button } from "@/components/ui/Button";
 
 export default function ScenarioModal({
   isOpen,
@@ -41,12 +42,12 @@ export default function ScenarioModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4 backdrop-blur-xs animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-label="What If Scenario Mode"
     >
-      <div className="card w-full max-w-lg p-6 shadow-2xl border-subtle bg-surface">
+      <div className="glass-4 w-full max-w-lg p-6 rounded-2xl shadow-2xl">
         <div className="flex items-start justify-between">
           <div>
             <h3 className="text-xl font-bold text-primary">
@@ -135,12 +136,12 @@ export default function ScenarioModal({
         </div>
 
         <div className="mt-6 flex justify-end gap-2.5 border-t border-subtle pt-4">
-          <button type="button" onClick={onClose} className="btn btn-secondary btn-sm">
+          <Button variant="secondary" size="sm" onClick={onClose}>
             Cancel
-          </button>
-          <button type="button" onClick={handleApply} className="btn btn-primary btn-sm">
+          </Button>
+          <Button variant="primary" size="sm" onClick={handleApply}>
             Recalculate recommendation
-          </button>
+          </Button>
         </div>
       </div>
     </div>

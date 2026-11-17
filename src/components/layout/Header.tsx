@@ -4,9 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { useScroll, useMotionValueEvent, useSpring, motion } from "framer-motion";
-import ThemeToggle from "./ThemeToggle";
+import ThemePicker from "./ThemePicker";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
+import Button from "@/components/ui/Button";
 import { Search } from "lucide-react";
 
 export default function Header() {
@@ -30,7 +31,7 @@ export default function Header() {
     <header
       className={`sticky top-0 z-40 w-full transition-[height,background-color,border-color] duration-200 ease-out ${
         isScrolled
-          ? "h-12 bg-surface/80 backdrop-blur-md border-b border-subtle shadow-xs"
+          ? "h-12 glass-3 border-b border-border-strong shadow-md"
           : "h-16 bg-transparent"
       }`}
     >
@@ -61,35 +62,39 @@ export default function Header() {
         <DesktopNav />
 
         <div className="flex items-center gap-2">
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            size="sm"
             onClick={openCommandPalette}
-            className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-subtle bg-elevated px-2.5 py-1.5 text-xs text-secondary hover:text-primary transition-colors focus-visible:outline-none"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 text-xs text-secondary hover:text-primary"
             aria-label="Search or jump to page"
           >
             <Search className="h-3.5 w-3.5" />
             <span>Search</span>
-            <kbd className="rounded bg-surface border border-subtle px-1 py-0.5 text-[10px] font-semibold text-secondary shadow-xs">
+            <kbd className="rounded bg-surface border border-border-subtle px-1 py-0.5 text-[10px] font-semibold text-secondary shadow-xs">
               ⌘K
             </kbd>
-          </button>
-          <ThemeToggle />
-          <button
+          </Button>
+          <ThemePicker />
+          <Button
             type="button"
+            variant="secondary"
+            size="sm"
             onClick={() => setMobileOpen((v) => !v)}
-            className="btn btn-secondary btn-sm md:hidden"
+            className="md:hidden"
             aria-expanded={mobileOpen}
             aria-label="Toggle menu"
           >
             Menu
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* 2px Scroll progress bar pinned to the bottom edge */}
       <motion.div
         style={{ scaleX }}
-        className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-trust via-ai to-success origin-left transition-opacity duration-200 ${
+        className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent via-accent-ai to-accent-success origin-left transition-opacity duration-200 ${
           isPast100 ? "opacity-100" : "opacity-0"
         }`}
         aria-hidden="true"

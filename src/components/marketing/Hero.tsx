@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Clock } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 import FloatingMathBackground from "./FloatingMathBackground";
+import { Button } from "@/components/ui/Button";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -91,13 +92,12 @@ export default function Hero() {
               whileTap={{ y: 0, scale: 0.98 }}
               transition={{ duration: 0.15 }}
             >
-              <Link
-                href="/recommend"
-                className="btn btn-cta btn-lg shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                Find my plan
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <Button asChild variant="cta" size="lg" className="shadow-lg hover:shadow-xl">
+                <Link href="/recommend">
+                  Find my plan
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
             </motion.div>
 
             <motion.div
@@ -105,12 +105,11 @@ export default function Hero() {
               whileTap={{ y: 0, scale: 0.98 }}
               transition={{ duration: 0.15 }}
             >
-              <Link
-                href="/compare"
-                className="btn btn-secondary btn-lg border border-subtle/90 bg-surface/80 dark:bg-elevated/90 dark:border-slate-500/70 dark:hover:border-trust text-primary hover:text-trust shadow-sm hover:shadow-md transition-all duration-200"
-              >
-                Compare all plans
-              </Link>
+              <Button asChild variant="secondary" size="lg" className="shadow-sm hover:shadow-md">
+                <Link href="/compare">
+                  Compare all plans
+                </Link>
+              </Button>
             </motion.div>
           </motion.div>
 

@@ -38,13 +38,13 @@ export function Modal({ isOpen, onClose, title, description, children, className
       className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
     >
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-overlay backdrop-blur-xs transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
       <div
         className={cn(
-          "relative z-10 w-full max-w-lg rounded-2xl border border-subtle bg-surface p-6 shadow-2xl",
+          "relative z-10 w-full max-w-lg rounded-2xl glass-4 p-6 shadow-2xl",
           className,
         )}
       >

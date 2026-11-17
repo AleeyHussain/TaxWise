@@ -6,6 +6,7 @@ import { products } from "@/features/products/catalogue";
 import type { FeatureKey, Product } from "@/types";
 import { ProductRow } from "../_components/ProductRow";
 import { SchemaCheckPanel } from "../_components/SchemaCheckPanel";
+import { Button } from "@/components/ui/Button";
 
 const FEATURE_KEYS = Object.keys(FEATURE_LABELS) as FeatureKey[];
 
@@ -61,9 +62,9 @@ export default function AdminProductsPage() {
             comparison table and assistant read from.
           </p>
         </div>
-        <button type="button" onClick={exportJson} className="btn btn-secondary shrink-0">
+        <Button type="button" onClick={exportJson} variant="secondary" className="shrink-0">
           Export config as JSON
-        </button>
+        </Button>
       </header>
 
       <SchemaCheckPanel

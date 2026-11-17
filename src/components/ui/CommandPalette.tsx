@@ -37,14 +37,14 @@ export default function CommandPalette() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 bg-black/60 backdrop-blur-xs p-4 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 bg-overlay backdrop-blur-xs p-4 animate-fade-in"
       onClick={() => setOpen(false)}
       role="dialog"
       aria-modal="true"
       aria-label="Command palette"
     >
       <div
-        className="w-full max-w-xl overflow-hidden rounded-2xl border border-subtle bg-surface shadow-2xl"
+        className="w-full max-w-xl overflow-hidden rounded-2xl glass-4 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <Command label="Global Command Menu" className="flex flex-col">

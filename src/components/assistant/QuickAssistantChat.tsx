@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Send, X, ExternalLink, Bot } from "lucide-react";
 import QuickChatMessages, { type ChatItem } from "./QuickChatMessages";
 import type { AssistantResponse } from "@/types";
+import { Button } from "@/components/ui/Button";
 
 const QUICK_PROMPTS = [
   "Which plan is best for freelancers?",
@@ -153,14 +154,16 @@ export default function QuickAssistantChat({ onClose }: { onClose: () => void })
           placeholder="Ask a tax question..."
           className="flex-1 rounded-xl border border-subtle bg-elevated/60 px-3.5 py-2 text-xs sm:text-sm text-primary placeholder:text-secondary focus:border-trust focus:outline-none"
         />
-        <button
+        <Button
           type="submit"
           disabled={!input.trim() || loading}
-          className="btn btn-primary h-9 w-9 rounded-xl p-0 disabled:opacity-40"
+          variant="primary"
+          size="sm"
+          className="h-9 w-9 rounded-xl p-0"
           aria-label="Send message"
         >
           <Send className="h-4 w-4" />
-        </button>
+        </Button>
       </form>
     </motion.div>
   );
