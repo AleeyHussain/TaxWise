@@ -123,6 +123,16 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 ---
 
+## Visual Showcase (Light & Dark Mode)
+
+| Light Theme | Dark Theme |
+|:---:|:---:|
+| ![TaxWise Light Theme](./public/proof/light-mode.png) | ![TaxWise Dark Theme](./public/proof/dark-mode.png) |
+
+Interactive motion demo video is available at [`public/proof/taxwise-ui-motion.webm`](./public/proof/taxwise-ui-motion.webm).
+
+---
+
 ## How to Add a New Plan
 
 1. Open `src/features/products/` and add the plan definition to the appropriate category module (e.g., `standard-plans.ts`, `personal-plans.ts`, or `corporate-plans.ts`).
