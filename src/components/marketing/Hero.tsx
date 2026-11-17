@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Clock } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
+import FloatingMathBackground from "./FloatingMathBackground";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -20,9 +21,11 @@ export default function Hero() {
       ref={containerRef}
       className="relative overflow-hidden border-b border-subtle bg-base"
     >
-      {/* Background with radial gradient and scroll parallax */}
+      {/* Background with radial gradient, scroll parallax, and floating math operations */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(30,58,138,0.12),rgba(255,255,255,0))]" />
       
+      <FloatingMathBackground />
+
       <motion.div
         style={{ y: shouldReduceMotion ? 0 : parallaxY }}
         className="pointer-events-none absolute inset-0 -z-10 opacity-40"
@@ -98,13 +101,13 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ y: 0, scale: 0.98 }}
               transition={{ duration: 0.15 }}
             >
               <Link
                 href="/compare"
-                className="btn btn-secondary btn-lg"
+                className="btn btn-secondary btn-lg border border-subtle/90 bg-surface/80 dark:bg-elevated/90 dark:border-slate-500/70 dark:hover:border-trust text-primary hover:text-trust shadow-sm hover:shadow-md transition-all duration-200"
               >
                 Compare all plans
               </Link>

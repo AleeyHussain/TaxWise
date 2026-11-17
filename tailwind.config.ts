@@ -12,7 +12,6 @@ const config: Config = {
         "text-primary": "var(--text-primary)",
         "text-secondary": "var(--text-secondary)",
         "border-subtle": "var(--border-subtle)",
-        base: "var(--bg-base)",
         surface: "var(--bg-surface)",
         elevated: "var(--bg-elevated)",
         primary: "var(--text-primary)",

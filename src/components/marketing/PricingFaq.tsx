@@ -32,18 +32,26 @@ export default function PricingFaq() {
         <Accordion.Root
           type="single"
           collapsible
-          className="mt-8 divide-y divide-subtle border-y border-subtle"
+          className="mt-8 space-y-3"
         >
           {PRICING_FAQS.map((faq, idx) => (
-            <Accordion.Item key={faq.q} value={`pricing-${idx}`} className="py-2">
+            <Accordion.Item
+              key={faq.q}
+              value={`pricing-${idx}`}
+              className="group rounded-2xl border border-subtle bg-surface/60 backdrop-blur-sm transition-all duration-200 hover:border-trust/40 hover:shadow-md data-[state=open]:border-trust/60 data-[state=open]:bg-surface"
+            >
               <Accordion.Header className="flex">
-                <Accordion.Trigger className="group flex w-full cursor-pointer items-center justify-between gap-4 py-3 text-left font-semibold text-primary transition-colors hover:text-trust focus-visible:outline-none min-h-[44px]">
-                  <span className="text-sm sm:text-base">{faq.q}</span>
-                  <Plus className="h-4 w-4 shrink-0 text-secondary transition-transform duration-200 group-data-[state=open]:rotate-45" />
+                <Accordion.Trigger className="flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left font-bold text-primary transition-colors hover:text-trust focus-visible:outline-none min-h-[52px]">
+                  <span className="text-base sm:text-lg font-bold text-primary group-hover:text-trust transition-colors">
+                    {faq.q}
+                  </span>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-elevated border border-subtle text-secondary transition-all duration-200 group-hover:border-trust/40 group-hover:text-trust group-data-[state=open]:rotate-45 group-data-[state=open]:bg-trust/10 group-data-[state=open]:text-trust">
+                    <Plus className="h-4 w-4" />
+                  </span>
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Content className="overflow-hidden transition-[height] duration-200 ease-out data-[state=open]:h-[var(--radix-accordion-content-height)] data-[state=closed]:h-0">
-                <p className="pb-4 pt-1 text-sm text-secondary leading-relaxed">
+                <p className="px-5 pb-5 pt-1 text-sm sm:text-base text-secondary leading-relaxed border-t border-subtle/50">
                   {faq.a}
                 </p>
               </Accordion.Content>
