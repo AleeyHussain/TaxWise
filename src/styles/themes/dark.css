@@ -1,5 +1,6 @@
 .dark,
-[data-theme="dark"] {
+[data-theme="dark"],
+html[data-theme="dark"] {
   --bg-base: #0D0E11;
   --bg-surface: #18191E;
   --bg-elevated: #212229;

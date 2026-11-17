@@ -1,5 +1,6 @@
 :root,
-[data-theme="light"] {
+[data-theme="light"],
+html[data-theme="light"] {
   --bg-base: #FAFAF9;
   --bg-surface: #FFFFFF;
   --bg-elevated: #F1F5F9;

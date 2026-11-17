@@ -1,4 +1,6 @@
-[data-theme="aurora"] {
+[data-theme="aurora"],
+html[data-theme="aurora"],
+html[data-theme="aurora"].dark {
   --bg-base: #0B0F19;
   --bg-surface: #141A2E;
   --bg-elevated: #1D2642;

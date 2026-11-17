@@ -1,4 +1,5 @@
-[data-theme="rose"] {
+[data-theme="rose"],
+html[data-theme="rose"] {
   --bg-base: #FDF2F8;
   --bg-surface: #FFFFFF;
   --bg-elevated: #FCE7F3;

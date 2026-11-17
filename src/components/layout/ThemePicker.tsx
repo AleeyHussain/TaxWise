@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
 
@@ -113,44 +112,32 @@ export default function ThemePicker() {
         <DropdownMenu.Content
           align="end"
           sideOffset={8}
-          asChild
+          className="z-[100] min-w-[200px] overflow-hidden rounded-2xl glass-3 p-1.5 shadow-2xl border border-border-strong animate-fade-in"
         >
-          <AnimatePresence>
-            {open && (
-              <motion.div
-                initial={{ opacity: 0, y: -4, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -4, scale: 0.96 }}
-                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                className="z-50 min-w-[200px] overflow-hidden rounded-2xl glass-3 p-1.5 shadow-2xl"
+          <div className="px-3 py-1.5 text-[11px] font-bold text-secondary uppercase tracking-wider">
+            Color Theme
+          </div>
+          {THEMES.map((t) => {
+            const isActive = currentTheme === t.id;
+            return (
+              <DropdownMenu.Item
+                key={t.id}
+                onSelect={() => applyTheme(t.id)}
+                className="group flex cursor-pointer items-center justify-between rounded-xl px-2.5 py-2 text-xs font-semibold text-primary outline-none transition-colors hover:bg-elevated focus:bg-elevated"
               >
-                <div className="px-3 py-1.5 text-[11px] font-bold text-secondary uppercase tracking-wider">
-                  Color Theme
+                <div className="flex items-center gap-3">
+                  <span
+                    className="h-7 w-7 rounded-full border border-white/20 shadow-xs shrink-0"
+                    style={{ background: t.gradient }}
+                  />
+                  <span className="text-sm">{t.name}</span>
                 </div>
-                {THEMES.map((t) => {
-                  const isActive = currentTheme === t.id;
-                  return (
-                    <DropdownMenu.Item
-                      key={t.id}
-                      onSelect={() => applyTheme(t.id)}
-                      className="group flex cursor-pointer items-center justify-between rounded-xl px-2.5 py-2 text-xs font-semibold text-primary outline-none transition-colors hover:bg-elevated focus:bg-elevated"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span
-                          className="h-7 w-7 rounded-full border border-white/20 shadow-xs shrink-0"
-                          style={{ background: t.gradient }}
-                        />
-                        <span className="text-sm">{t.name}</span>
-                      </div>
-                      {isActive && (
-                        <Check className="h-4 w-4 text-accent shrink-0 ml-3" />
-                      )}
-                    </DropdownMenu.Item>
-                  );
-                })}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                {isActive && (
+                  <Check className="h-4 w-4 text-accent shrink-0 ml-3" />
+                )}
+              </DropdownMenu.Item>
+            );
+          })}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

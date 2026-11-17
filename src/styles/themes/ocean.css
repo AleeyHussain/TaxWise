@@ -1,4 +1,6 @@
-[data-theme="ocean"] {
+[data-theme="ocean"],
+html[data-theme="ocean"],
+html[data-theme="ocean"].dark {
   --bg-base: #0A1628;
   --bg-surface: #0F1F3A;
   --bg-elevated: #162C52;

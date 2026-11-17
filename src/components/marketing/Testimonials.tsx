@@ -10,7 +10,7 @@ const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
 export default function Testimonials() {
   return (
-    <section className="container-px py-16 md:py-24">
+    <section id="testimonials" className="container-px py-16 md:py-24">
       <div className="mx-auto max-w-3xl text-center mb-12">
         <h2 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">
           Loved by filers who actually finished.
@@ -27,7 +27,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: EXPO_OUT }}
-          className="lg:col-span-2 glass-3 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl"
+          className="lg:col-span-2 glass-3 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl text-primary"
         >
           <div>
             {/* 5-star rating in accent-premium */}
@@ -38,10 +38,10 @@ export default function Testimonials() {
             </div>
 
             {/* Featured Quote */}
-            <blockquote className="text-xl sm:text-2xl font-medium text-primary leading-relaxed">
+            <blockquote className="text-xl sm:text-2xl font-semibold text-primary leading-relaxed">
               &ldquo;I always picked the wrong plan. TaxWise said &lsquo;Self-Employed&rsquo; and explained why. That&rsquo;s never happened before.&rdquo;
             </blockquote>
-            <p className="mt-4 text-sm text-secondary leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base text-secondary leading-relaxed font-normal">
               Having the specific reasoning listed line-by-line meant I didn&rsquo;t have to second-guess my deductible expenses or worry about an audit.
             </p>
           </div>
@@ -50,7 +50,7 @@ export default function Testimonials() {
             <AvatarTeal size={48} className="rounded-full shadow-md" />
             <div>
               <div className="font-bold text-primary text-base">Maya R.</div>
-              <div className="text-sm text-secondary">Freelance Designer</div>
+              <div className="text-sm text-secondary font-medium">Freelance Designer</div>
             </div>
           </div>
         </motion.div>
@@ -63,7 +63,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: 0.08, ease: EXPO_OUT }}
-            className="glass-2 rounded-3xl p-6 sm:p-7 flex flex-col justify-between flex-1 shadow-lg"
+            className="glass-2 rounded-3xl p-6 sm:p-7 flex flex-col justify-between flex-1 shadow-lg text-primary"
           >
             <div>
               <div className="flex items-center gap-1 text-accent-premium mb-3">
@@ -71,7 +71,7 @@ export default function Testimonials() {
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}
               </div>
-              <blockquote className="text-sm sm:text-base font-medium text-primary leading-snug">
+              <blockquote className="text-sm sm:text-base font-semibold text-primary leading-snug">
                 &ldquo;Took me two minutes. Saved me from buying the wrong tier. The reasoning is the part I actually trust.&rdquo;
               </blockquote>
             </div>
@@ -80,7 +80,7 @@ export default function Testimonials() {
               <AvatarAmber size={40} className="rounded-full shadow-sm" />
               <div>
                 <div className="font-bold text-primary text-sm">Devon K.</div>
-                <div className="text-xs text-secondary">First-time Filer</div>
+                <div className="text-xs text-secondary font-medium">First-time Filer</div>
               </div>
             </div>
           </motion.div>
@@ -91,7 +91,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: 0.16, ease: EXPO_OUT }}
-            className="glass-2 rounded-3xl p-6 sm:p-7 flex flex-col justify-between flex-1 shadow-lg"
+            className="glass-2 rounded-3xl p-6 sm:p-7 flex flex-col justify-between flex-1 shadow-lg text-primary"
           >
             <div>
               <div className="flex items-center gap-1 text-accent-premium mb-3">
@@ -99,7 +99,7 @@ export default function Testimonials() {
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}
               </div>
-              <blockquote className="text-sm sm:text-base font-medium text-primary leading-snug">
+              <blockquote className="text-sm sm:text-base font-semibold text-primary leading-snug">
                 &ldquo;The assistant answered a question my accountant charged me $80 to explain badly.&rdquo;
               </blockquote>
             </div>
@@ -108,7 +108,7 @@ export default function Testimonials() {
               <AvatarPurple size={40} className="rounded-full shadow-sm" />
               <div>
                 <div className="font-bold text-primary text-sm">Priya S.</div>
-                <div className="text-xs text-secondary">Small Business Owner</div>
+                <div className="text-xs text-secondary font-medium">Small Business Owner</div>
               </div>
             </div>
           </motion.div>

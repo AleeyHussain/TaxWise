@@ -11,11 +11,9 @@ const config: Config = {
         surface: "var(--bg-surface)",
         elevated: "var(--bg-elevated)",
         overlay: "var(--bg-overlay)",
-        primary: {
-          DEFAULT: "var(--text-primary)",
-          secondary: "var(--text-secondary)",
-          tertiary: "var(--text-tertiary)",
-        },
+        primary: "var(--text-primary)",
+        secondary: "var(--text-secondary)",
+        tertiary: "var(--text-tertiary)",
         border: {
           subtle: "var(--border-subtle)",
           DEFAULT: "var(--border-default)",

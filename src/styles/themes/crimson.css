@@ -1,4 +1,6 @@
-[data-theme="crimson"] {
+[data-theme="crimson"],
+html[data-theme="crimson"],
+html[data-theme="crimson"].dark {
   --bg-base: #1A1212;
   --bg-surface: #231818;
   --bg-elevated: #322222;
