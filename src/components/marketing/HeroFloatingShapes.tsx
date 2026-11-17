@@ -12,7 +12,7 @@ export default function HeroFloatingShapes() {
   return (
     <motion.div
       style={{ y: parallaxY }}
-      className="pointer-events-none absolute inset-0 overflow-hidden select-none z-0"
+      className="pointer-events-none absolute inset-0 overflow-hidden select-none z-0 hidden md:block"
       aria-hidden="true"
     >
       {/* Shape 1: Top-left floating circle (60px) */}

@@ -59,6 +59,7 @@ export function BotFaceSVG({
 
 export default function BotCursor({ isOpen = false, onClick }: { isOpen?: boolean; onClick?: () => void }) {
   const shouldReduceMotion = useReducedMotion();
+  const isTouch = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
   const [hasHovered, setHasHovered] = useState(false);
   const [isIdle, setIsIdle] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
@@ -70,7 +71,7 @@ export default function BotCursor({ isOpen = false, onClick }: { isOpen?: boolea
   const idleTimerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || isTouch) return;
     const handleMouseMove = (e: MouseEvent) => {
       setIsIdle(false);
       clearTimeout(idleTimerRef.current);
@@ -103,7 +104,7 @@ export default function BotCursor({ isOpen = false, onClick }: { isOpen?: boolea
 
   return (
     <motion.div
-      style={shouldReduceMotion ? { bottom: 24, right: 24 } : { top: smoothY, right: 24 }}
+      style={shouldReduceMotion || isTouch ? { bottom: 24, right: 24 } : { top: smoothY, right: 24 }}
       className="fixed z-40 flex items-center gap-2 select-none"
     >
       {(showTooltip || hasHovered) && (

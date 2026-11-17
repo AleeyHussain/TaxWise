@@ -20,7 +20,7 @@ const THEMES: ThemeOption[] = [
   {
     id: "light",
     name: "Light",
-    gradient: "linear-gradient(135deg, #1E3A8A 0%, #EA580C 100%)",
+    gradient: "linear-gradient(135deg, #1E3A8A 0%, #C2410C 100%)",
     primary: "#1E3A8A",
     darkScheme: false,
   },

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import dynamic from "next/dynamic";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageShell from "@/components/layout/PageShell";
-import CommandPalette from "@/components/ui/CommandPalette";
-import GlobalAssistantBot from "@/components/assistant/GlobalAssistantBot";
 import { Toaster } from "sonner";
+
+const CommandPalette = dynamic(() => import("@/components/ui/CommandPalette"), { ssr: false });
+const GlobalAssistantBot = dynamic(() => import("@/components/assistant/GlobalAssistantBot"), { ssr: false });
 
 const inter = Inter({
   subsets: ["latin"],

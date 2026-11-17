@@ -15,16 +15,14 @@ const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
 function H1Sparkle() {
   return (
-    <motion.span
-      animate={{ opacity: [0.6, 1, 0.6] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      className="inline-block text-accent-ai align-middle mx-1 w-[0.6em] h-[0.6em]"
+    <span
+      className="inline-block text-accent-ai align-middle mx-1 w-[0.6em] h-[0.6em] animate-pulse"
       aria-hidden="true"
     >
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
         <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
       </svg>
-    </motion.span>
+    </span>
   );
 }
 
@@ -49,31 +47,16 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.06, ease: EXPO_OUT }}
-              className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl leading-[1.1]"
-            >
+            <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl leading-[1.1]">
               The tax plan that actually<H1Sparkle /> fits<H1Sparkle /> your life.
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.12, ease: EXPO_OUT }}
-              className="mt-6 text-base sm:text-lg text-secondary leading-relaxed max-w-xl mx-auto lg:mx-0"
-            >
+            <p className="mt-6 text-base sm:text-lg text-secondary leading-relaxed max-w-xl mx-auto lg:mx-0">
               Answer five questions. Get a plan matched to your income, deductions,
               and how much help you want — with the reasoning spelled out.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.18, ease: EXPO_OUT }}
-              className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3.5"
-            >
+            <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
               <Button asChild variant="cta" size="lg" className="shadow-lg hover:shadow-xl">
                 <Link href="/recommend">
                   Find my plan
@@ -83,7 +66,7 @@ export default function Hero() {
               <Button asChild variant="secondary" size="lg" className="shadow-sm hover:shadow-md">
                 <Link href="/compare">Compare all plans</Link>
               </Button>
-            </motion.div>
+            </div>
 
             {/* AI Bot helper card */}
             <motion.div

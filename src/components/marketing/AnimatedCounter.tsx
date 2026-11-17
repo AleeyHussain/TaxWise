@@ -17,7 +17,7 @@ export default function AnimatedCounter({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-20px" });
   const shouldReduceMotion = useReducedMotion();
-  const [displayValue, setDisplayValue] = useState(shouldReduceMotion ? value : 0);
+  const [displayValue, setDisplayValue] = useState(value);
   const count = useMotionValue(0);
 
   useEffect(() => {

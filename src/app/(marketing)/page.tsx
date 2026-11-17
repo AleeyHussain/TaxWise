@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Hero from "@/components/marketing/Hero";
 import PlanGrid from "@/components/marketing/PlanGrid";
-import PricingFaq from "@/components/marketing/PricingFaq";
-import Testimonials from "@/components/marketing/Testimonials";
-import HowItWorks from "@/components/marketing/HowItWorks";
-import FaqSection from "@/components/marketing/FaqSection";
-import FinalCta from "@/components/marketing/FinalCta";
 import SectionDivider from "@/components/marketing/SectionDivider";
+
+const Testimonials = dynamic(() => import("@/components/marketing/Testimonials"));
+const HowItWorks = dynamic(() => import("@/components/marketing/HowItWorks"));
+const PricingFaq = dynamic(() => import("@/components/marketing/PricingFaq"));
+const FaqSection = dynamic(() => import("@/components/marketing/FaqSection"));
+const FinalCta = dynamic(() => import("@/components/marketing/FinalCta"));
 
 export const metadata: Metadata = {
   title: "TaxWise — The tax plan that actually fits your life",

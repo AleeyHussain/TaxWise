@@ -12,14 +12,9 @@ export default function HeroMockupCard({ className }: { className?: string }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, rotate: 0 }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-        rotate: shouldReduceMotion ? 0 : -2,
-      }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, ease: EXPO_OUT }}
+      initial={{ opacity: 1, y: 0, rotate: shouldReduceMotion ? 0 : -2 }}
+      whileHover={{ rotate: 0 }}
+      transition={{ duration: 0.3, ease: EXPO_OUT }}
       className={`relative w-full max-w-[380px] glass-2 rounded-3xl p-6 sm:p-7 shadow-2xl border-2 border-border-default/80 hover:rotate-0 transition-transform duration-300 ${className || ""}`}
     >
       {/* Header Badge & Confidence */}
@@ -33,9 +28,9 @@ export default function HeroMockupCard({ className }: { className?: string }) {
       {/* Plan Name & Price */}
       <div className="mt-4 flex items-baseline justify-between gap-2 border-b border-border-subtle pb-4">
         <div>
-          <h3 className="text-2xl font-extrabold text-primary">
+          <p className="text-2xl font-extrabold text-primary">
             Self-Employed
-          </h3>
+          </p>
           <p className="text-xs text-secondary mt-0.5">
             For freelancers & contractors
           </p>

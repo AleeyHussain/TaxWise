@@ -40,7 +40,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             "bg-transparent text-secondary hover:text-primary hover:bg-elevated":
               variant === "ghost",
             // cta     = accent-cta background, white text — RESERVED for the hero and final-CTA button ONLY. Maximum two instances per page.
-            "bg-accent-cta text-white hover:bg-accent-cta-hover shadow-md":
+            "bg-accent-cta text-white font-semibold hover:bg-accent-cta-hover shadow-md":
               variant === "cta",
 
             // Sizes

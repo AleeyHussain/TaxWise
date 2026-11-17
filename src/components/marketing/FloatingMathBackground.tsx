@@ -107,7 +107,7 @@ export default function FloatingMathBackground() {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 overflow-hidden hidden md:block"
       aria-hidden="true"
     >
       {/* Moving Equation Badges */}

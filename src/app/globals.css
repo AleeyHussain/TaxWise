@@ -27,6 +27,7 @@
     inset: 0;
     z-index: -1;
     pointer-events: none;
+    transform: translateZ(0);
     background-image:
       radial-gradient(60vw 60vw at 0% 0%, var(--mesh-primary) 0%, transparent 70%),
       radial-gradient(70vw 70vw at 100% 100%, var(--mesh-secondary) 0%, transparent 70%),
@@ -40,8 +41,10 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: var(--noise-opacity, 0.03);
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: var(--noise-opacity, 0.025);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    transform: translateZ(0);
   }
 
   h1,
@@ -58,6 +61,13 @@
   :focus-visible {
     outline: none !important;
     box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent-primary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
