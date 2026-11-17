@@ -11,6 +11,7 @@ import { exportRecommendationPdf } from "@/features/recommend/export-pdf";
 import ScenarioModal from "./ScenarioModal";
 import ResultActionButtons from "./ResultActionButtons";
 import { Button } from "@/components/ui/Button";
+import SuccessIllustration from "@/components/illustrations/SuccessIllustration";
 import type { RecommendationResult, QuestionnaireAnswers } from "@/types";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
@@ -50,18 +51,21 @@ export function ResultView({
         transition={{ duration: 0.4, ease: EXPO_OUT }}
         className="card overflow-hidden border-subtle"
       >
-        <div className="bg-gradient-to-r from-trust via-blue-900 to-base px-6 py-6 text-white">
-          <p className="text-xs font-bold tracking-wider text-blue-200 uppercase">
-            Recommended Plan
-          </p>
-          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-2xl font-extrabold sm:text-3xl text-white">
-              {result.recommendedProductName}
-            </h2>
-            <span className="text-2xl font-bold text-success">
-              {formatPrice(result.price)}
-            </span>
+        <div className="bg-gradient-to-r from-trust via-blue-900 to-base px-6 py-6 text-white flex items-center justify-between gap-4">
+          <div>
+            <p className="text-xs font-bold tracking-wider text-blue-200 uppercase">
+              Recommended Plan
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <h2 className="text-2xl font-extrabold sm:text-3xl text-white">
+                {result.recommendedProductName}
+              </h2>
+              <span className="text-2xl font-bold text-success">
+                {formatPrice(result.price)}
+              </span>
+            </div>
           </div>
+          <SuccessIllustration className="h-16 w-16 sm:h-20 sm:w-20 shrink-0 select-none" />
         </div>
 
         <div className="space-y-6 p-6 sm:p-7 bg-surface">

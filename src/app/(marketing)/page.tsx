@@ -6,6 +6,7 @@ import Testimonials from "@/components/marketing/Testimonials";
 import HowItWorks from "@/components/marketing/HowItWorks";
 import FaqSection from "@/components/marketing/FaqSection";
 import FinalCta from "@/components/marketing/FinalCta";
+import SectionDivider from "@/components/marketing/SectionDivider";
 
 export const metadata: Metadata = {
   title: "TaxWise — The tax plan that actually fits your life",
@@ -17,11 +18,17 @@ export default function LandingPage() {
   return (
     <div>
       <Hero />
+      <SectionDivider />
       <PlanGrid />
-      <PricingFaq />
+      <SectionDivider />
       <Testimonials />
+      <SectionDivider />
       <HowItWorks />
+      <SectionDivider />
+      <PricingFaq />
+      <SectionDivider />
       <FaqSection />
+      <SectionDivider />
       <FinalCta />
     </div>
   );

@@ -7,6 +7,7 @@ import { products } from "@/features/products/catalogue";
 import { searchableText, CATEGORY_OPTIONS, type CategoryFilter, type SortOption } from "@/features/products/search";
 import type { FeatureKey } from "@/types";
 import { Button } from "@/components/ui/Button";
+import EmptyStateIllustration from "@/components/illustrations/EmptyStateIllustration";
 
 export default function ProductsClientView() {
   const [query, setQuery] = useState("");
@@ -158,12 +159,8 @@ export default function ProductsClientView() {
       </p>
 
       {visible.length === 0 ? (
-        <div className="card mt-6 flex flex-col items-center justify-center p-12 text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-elevated text-secondary border border-subtle mb-4">
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
+        <div className="glass-2 mt-6 flex flex-col items-center justify-center p-10 text-center rounded-2xl shadow-lg">
+          <EmptyStateIllustration className="w-28 h-28 mb-2" />
           <h3 className="text-base font-bold text-primary">
             No matching tax plans
           </h3>

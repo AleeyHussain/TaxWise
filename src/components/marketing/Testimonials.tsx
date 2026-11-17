@@ -1,94 +1,119 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "I used to spend hours comparing TurboTax and H&R Block tiers. TaxWise matched my freelancing and ETF dividends to Self-Employed in two minutes flat.",
-    author: "Elena Rostova",
-    role: "Freelance UI Designer",
-    rating: 5,
-    initials: "ER",
-  },
-  {
-    quote:
-      "When we incorporated our design studio last autumn, we were terrified of misfiling. The corporate recommendations gave us crystal clarity on what forms we actually needed.",
-    author: "Marcus Chen",
-    role: "Co-Founder, Studio Chen",
-    rating: 5,
-    initials: "MC",
-  },
-  {
-    quote:
-      "The expert assist upgrade was worth every penny. Being able to ask questions about my rental deductions without buying a whole new plan saved me over $300.",
-    author: "Sarah Jenkins",
-    role: "Property Owner & Educator",
-    rating: 5,
-    initials: "SJ",
-  },
-];
+import { Star } from "lucide-react";
+import AvatarTeal from "@/components/illustrations/avatars/AvatarTeal";
+import AvatarAmber from "@/components/illustrations/avatars/AvatarAmber";
+import AvatarPurple from "@/components/illustrations/avatars/AvatarPurple";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
 export default function Testimonials() {
   return (
-    <section className="container-px py-16 md:py-24 border-t border-subtle">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease: EXPO_OUT }}
-      >
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-            Trusted by thousands of independent filers
-          </h2>
-          <p className="mt-3 text-secondary">
-            Real feedback from filers who found their match without upselling.
-          </p>
-        </div>
+    <section className="container-px py-16 md:py-24">
+      <div className="mx-auto max-w-3xl text-center mb-12">
+        <h2 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">
+          Loved by filers who actually finished.
+        </h2>
+        <p className="mt-3 text-secondary text-base leading-relaxed">
+          Real feedback from independent filers who found their match with clear reasoning, not upselling.
+        </p>
+      </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((t, idx) => (
-            <motion.div
-              key={t.author}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: idx * 0.04, ease: EXPO_OUT }}
-              className="card card-hover flex flex-col justify-between p-6 sm:p-7"
-            >
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-stretch">
+        {/* Featured Testimonial Card (Left, 2-column span, glass-3) */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: EXPO_OUT }}
+          className="lg:col-span-2 glass-3 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl"
+        >
+          <div>
+            {/* 5-star rating in accent-premium */}
+            <div className="flex items-center gap-1.5 text-accent-premium mb-6">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-5 w-5 fill-current" />
+              ))}
+            </div>
+
+            {/* Featured Quote */}
+            <blockquote className="text-xl sm:text-2xl font-medium text-primary leading-relaxed">
+              &ldquo;I always picked the wrong plan. TaxWise said &lsquo;Self-Employed&rsquo; and explained why. That&rsquo;s never happened before.&rdquo;
+            </blockquote>
+            <p className="mt-4 text-sm text-secondary leading-relaxed">
+              Having the specific reasoning listed line-by-line meant I didn&rsquo;t have to second-guess my deductible expenses or worry about an audit.
+            </p>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-border-subtle flex items-center gap-4">
+            <AvatarTeal size={48} className="rounded-full shadow-md" />
+            <div>
+              <div className="font-bold text-primary text-base">Maya R.</div>
+              <div className="text-sm text-secondary">Freelance Designer</div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Stacked Cards on Right (1-column span, glass-2) */}
+        <div className="flex flex-col gap-6 lg:col-span-1 justify-between">
+          {/* Card 2: Devon K. */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.08, ease: EXPO_OUT }}
+            className="glass-2 rounded-3xl p-6 sm:p-7 flex flex-col justify-between flex-1 shadow-lg"
+          >
+            <div>
+              <div className="flex items-center gap-1 text-accent-premium mb-3">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+              <blockquote className="text-sm sm:text-base font-medium text-primary leading-snug">
+                &ldquo;Took me two minutes. Saved me from buying the wrong tier. The reasoning is the part I actually trust.&rdquo;
+              </blockquote>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-border-subtle flex items-center gap-3">
+              <AvatarAmber size={40} className="rounded-full shadow-sm" />
               <div>
-                <div className="flex gap-1 text-amber-500" aria-label={`${t.rating} out of 5 stars`}>
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-secondary">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
+                <div className="font-bold text-primary text-sm">Devon K.</div>
+                <div className="text-xs text-secondary">First-time Filer</div>
               </div>
+            </div>
+          </motion.div>
 
-              <div className="mt-6 flex items-center gap-3 border-t border-subtle pt-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-elevated border border-subtle text-xs font-bold text-trust">
-                  {t.initials}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-primary">
-                    {t.author}
-                  </p>
-                  <p className="text-xs text-secondary">
-                    {t.role}
-                  </p>
-                </div>
+          {/* Card 3: Priya S. */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.16, ease: EXPO_OUT }}
+            className="glass-2 rounded-3xl p-6 sm:p-7 flex flex-col justify-between flex-1 shadow-lg"
+          >
+            <div>
+              <div className="flex items-center gap-1 text-accent-premium mb-3">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" />
+                ))}
               </div>
-            </motion.div>
-          ))}
+              <blockquote className="text-sm sm:text-base font-medium text-primary leading-snug">
+                &ldquo;The assistant answered a question my accountant charged me $80 to explain badly.&rdquo;
+              </blockquote>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-border-subtle flex items-center gap-3">
+              <AvatarPurple size={40} className="rounded-full shadow-sm" />
+              <div>
+                <div className="font-bold text-primary text-sm">Priya S.</div>
+                <div className="text-xs text-secondary">Small Business Owner</div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
