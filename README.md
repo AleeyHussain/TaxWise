@@ -120,6 +120,9 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 5. **One-Click PDF Export**: Client-side summary generation via `jspdf` including selected tier, match confidence, detailed reasons, matched factors, warnings, and legal disclaimer.
 6. **Scenario Explorer ("What if?" Mode)**: Modal allowing users to adjust income sources or expert guidance preferences and instantly recalculate recommendations.
 7. **Typeahead Combobox**: `/products` features an accessible combobox suggesting supported features and plans as the user types.
+8. **Glassmorphism Design System**: Frosted glass surfaces (`.glass`, `.glass-card`, `.glass-elevated`) across cards, headers, dropdowns, and modals with backdrop blur and specular highlights.
+9. **Pointer-Tracking AI Bot Companion & Quick Chat Drawer**: Floating animated bot that glides along a vertical straight line tracking cursor position with reactive eye gaze. Clickable to reveal a site-wide quick chat assistant drawer with prompt chips and live AI answers.
+10. **Interactive Plan Comparison Matrix**: Fast category tabs and "Highlight differences only" toggle on `/compare` for side-by-side plan evaluation without horizontal fatigue.
 
 ---
 

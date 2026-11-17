@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageShell from "@/components/layout/PageShell";
 import CommandPalette from "@/components/ui/CommandPalette";
+import GlobalAssistantBot from "@/components/assistant/GlobalAssistantBot";
 import { Toaster } from "sonner";
 
 const inter = Inter({
@@ -52,6 +53,7 @@ export default function RootLayout({
         <PageShell>{children}</PageShell>
         <Footer />
         <CommandPalette />
+        <GlobalAssistantBot />
         <Toaster position="bottom-right" richColors theme="system" />
       </body>
     </html>
