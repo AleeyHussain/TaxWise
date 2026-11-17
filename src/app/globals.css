@@ -163,13 +163,13 @@
 
 @layer utilities {
   .text-primary {
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
   }
   .text-secondary {
-    color: var(--text-secondary);
+    color: var(--text-secondary) !important;
   }
   .text-tertiary {
-    color: var(--text-tertiary);
+    color: var(--text-tertiary) !important;
   }
 }
 

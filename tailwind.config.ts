@@ -5,12 +5,14 @@ const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      colors: {
-        // Step 3 tokens
+      backgroundColor: {
         base: "var(--bg-base)",
         surface: "var(--bg-surface)",
         elevated: "var(--bg-elevated)",
         overlay: "var(--bg-overlay)",
+      },
+      colors: {
+        // Step 3 tokens
         primary: "var(--text-primary)",
         secondary: "var(--text-secondary)",
         tertiary: "var(--text-tertiary)",
