@@ -19,6 +19,7 @@ export function LogoMark({
   className?: string;
 }) {
   const isMonochrome = variant === "monochrome";
+  const squircle = "M 34 4 L 94 4 C 114 4 124 14 124 34 L 124 94 C 124 114 114 124 94 124 L 34 124 C 14 124 4 114 4 94 L 4 34 C 4 14 14 4 34 4 Z";
 
   return (
     <svg
@@ -32,8 +33,8 @@ export function LogoMark({
     >
       <defs>
         <linearGradient id="tw-brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: "var(--accent-primary, #2563EB)" }} />
-          <stop offset="100%" style={{ stopColor: "var(--accent-cta, #06B6D4)" }} />
+          <stop offset="0%" style={{ stopColor: "var(--accent-primary, #1E3A8A)" }} />
+          <stop offset="100%" style={{ stopColor: "var(--accent-cta, #0284C7)" }} />
         </linearGradient>
         {isMonochrome && (
           <mask id="tw-mark-mask">
@@ -41,53 +42,36 @@ export function LogoMark({
             <g
               fill="none"
               stroke="#000000"
-              strokeWidth="10"
+              strokeWidth="11"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M 24 44 L 56 44" />
-              <path d="M 40 44 L 40 86" />
-              <path d="M 64 44 L 73 86 L 84 55 L 95 88 L 105 38" />
+              <path d="M 40 42 L 40 86" />
+              <path d="M 22 42 L 58 42 L 70 86 L 82 58 L 94 86 L 106 42" />
             </g>
-            <path
-              d="M 106 14 Q 106 20 100 20 Q 106 20 106 26 Q 106 20 112 20 Q 106 20 106 14 Z"
-              fill="#000000"
-            />
           </mask>
         )}
       </defs>
 
-      {/* Badge container */}
-      <rect
-        x="4"
-        y="4"
-        width="120"
-        height="120"
-        rx="24"
+      {/* Squircle Badge Container */}
+      <path
+        d={squircle}
         fill={isMonochrome ? "currentColor" : "url(#tw-brand-grad)"}
         mask={isMonochrome ? "url(#tw-mark-mask)" : undefined}
       />
 
-      {/* Letters TW - visible in standard/full variant */}
+      {/* Hand-crafted Monogram Merge (T + W) */}
       {!isMonochrome && (
-        <>
-          <g
-            fill="none"
-            stroke="var(--bg-base, #FFFFFF)"
-            strokeWidth="10"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M 24 44 L 56 44" />
-            <path d="M 40 44 L 40 86" />
-            <path d="M 64 44 L 73 86 L 84 55 L 95 88 L 105 38" />
-          </g>
-          <path
-            d="M 106 14 Q 106 20 100 20 Q 106 20 106 26 Q 106 20 112 20 Q 106 20 106 14 Z"
-            fill="#FFFFFF"
-            fillOpacity="0.9"
-          />
-        </>
+        <g
+          fill="none"
+          stroke="var(--bg-base, #FFFFFF)"
+          strokeWidth="11"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M 40 42 L 40 86" />
+          <path d="M 22 42 L 58 42 L 70 86 L 82 58 L 94 86 L 106 42" />
+        </g>
       )}
     </svg>
   );

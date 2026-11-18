@@ -13,19 +13,6 @@ import HeroIllustration from "@/components/illustrations/HeroIllustration";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
-function H1Sparkle() {
-  return (
-    <span
-      className="inline-block text-accent-ai align-middle mx-1 w-[0.6em] h-[0.6em] animate-pulse"
-      aria-hidden="true"
-    >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-      </svg>
-    </span>
-  );
-}
-
 export default function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-subtle bg-base">
@@ -42,13 +29,13 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0, ease: EXPO_OUT }}
             >
               <span className="badge badge-brand mb-6 py-1 px-3.5 shadow-xs border border-subtle inline-flex">
-                <Sparkles className="h-3.5 w-3.5 text-trust" />
+                <ShieldCheck className="h-3.5 w-3.5 text-trust" />
                 AI-guided · Rules-backed · 4.9★ from 12,000 filers
               </span>
             </motion.div>
 
             <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl leading-[1.1]">
-              The tax plan that actually<H1Sparkle /> fits<H1Sparkle /> your life.
+              The tax plan that actually fits your life.
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-secondary leading-relaxed max-w-xl mx-auto lg:mx-0">

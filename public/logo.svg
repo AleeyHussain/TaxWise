@@ -1,24 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
   <defs>
-    <linearGradient id="tw-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color: var(--accent-primary, #2563EB);" />
-      <stop offset="100%" style="stop-color: var(--accent-cta, #06B6D4);" />
+    <linearGradient id="tw-brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color: var(--accent-primary, #1E3A8A);" />
+      <stop offset="100%" style="stop-color: var(--accent-cta, #0284C7);" />
     </linearGradient>
   </defs>
-
-  <!-- Rounded badge -->
-  <rect x="4" y="4" width="120" height="120" rx="24" fill="url(#tw-gradient)" />
-
-  <!-- Letters "TW" -->
-  <g fill="none" stroke="var(--bg-base, #FFFFFF)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Letter T -->
-    <path d="M 24 44 L 56 44" />
-    <path d="M 40 44 L 40 86" />
-
-    <!-- Letter W with personality: middle dip + right leg lift -->
-    <path d="M 64 44 L 73 86 L 84 55 L 95 88 L 105 38" />
+  <path d="M 34 4 L 94 4 C 114 4 124 14 124 34 L 124 94 C 124 114 114 124 94 124 L 34 124 C 14 124 4 114 4 94 L 4 34 C 4 14 14 4 34 4 Z" fill="url(#tw-brand-grad)" />
+  <g fill="none" stroke="var(--bg-base, #FFFFFF)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 40 42 L 40 86" />
+    <path d="M 22 42 L 58 42 L 70 86 L 82 58 L 94 86 L 106 42" />
   </g>
-
-  <!-- Sparkle star at top-right corner (12 units) -->
-  <path d="M 106 14 Q 106 20 100 20 Q 106 20 106 26 Q 106 20 112 20 Q 106 20 106 14 Z" fill="#FFFFFF" fill-opacity="0.9" />
 </svg>
