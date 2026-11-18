@@ -2,8 +2,8 @@
 
 A production-ready tax plan recommender and AI assistant built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, and **framer-motion**. It guides individuals, freelancers, and incorporated businesses to the optimal tax filing tier through a deterministic rules engine with safety-grounded AI assistance.
 
-Live Deployment: [https://tax-wise-nine.vercel.app/](https://tax-wise-nine.vercel.app/)
-
+- **Live Deployment (Vercel):** [https://tax-wise-nine.vercel.app/](https://tax-wise-nine.vercel.app/)
+- **Live Deployment (Render):** [https://taxwise-7ci1.onrender.com/](https://taxwise-7ci1.onrender.com/)
 ---
 
 ## Architecture & Directory Structure
