@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import dynamic from "next/dynamic";
 import Header from "@/components/layout/Header";
@@ -22,11 +22,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://taxwise.vercel.app"),
-  title: "TaxWise — The tax plan that actually fits your life",
+  title: "TaxWise — Deterministic Tax Plan Recommender",
   description:
-    "Answer five questions. Get a plan matched to your income, deductions, and how much help you want — with the reasoning spelled out.",
+    "Stop overpaying for tax software bundles. Deterministic filing tier matching for W-2, 1099, and LLC filers with transparent statutory reasoning.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -37,15 +44,38 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
+    title: "TaxWise — Deterministic Tax Plan Recommender",
+    description: "Stop overpaying for tax software bundles. Deterministic filing tier matching with transparent statutory reasoning.",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
+    title: "TaxWise — Deterministic Tax Plan Recommender",
+    description: "Stop overpaying for tax software bundles. Deterministic filing tier matching with transparent statutory reasoning.",
     images: ["/twitter-card.png"],
   },
 };
 
 const themeScript = `(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);if(['dark','ocean','crimson','aurora'].indexOf(t)!==-1){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "TaxWise",
+      "url": "https://tax-wise-nine.vercel.app",
+      "description": "Deterministic tax plan matching engine for US personal and corporate filers.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All"
+    },
+    {
+      "@type": "Organization",
+      "name": "TaxWise",
+      "url": "https://tax-wise-nine.vercel.app"
+    }
+  ]
+};
 
 export default function RootLayout({
   children,
@@ -53,12 +83,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="light" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      data-theme="light"
+      className={`${inter.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="flex min-h-screen flex-col font-sans bg-base text-primary">
         <a

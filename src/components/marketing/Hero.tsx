@@ -2,14 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Clock } from "lucide-react";
-import AnimatedCounter from "./AnimatedCounter";
-import FloatingMathBackground from "./FloatingMathBackground";
+import { ArrowRight, ShieldCheck, Terminal, FileCode2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { BotFaceSVG } from "@/components/BotCursor";
+import FloatingMathBackground from "./FloatingMathBackground";
 import HeroFloatingShapes from "./HeroFloatingShapes";
-import HeroMockupCard from "./HeroMockupCard";
-import HeroIllustration from "@/components/illustrations/HeroIllustration";
+import InteractiveHeroSimulator from "./InteractiveHeroSimulator";
 
 const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -19,102 +16,98 @@ export default function Hero() {
       <FloatingMathBackground />
       <HeroFloatingShapes />
 
+      {/* Subtle Architectural Grid Lines */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03] select-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--text-primary) 1px, transparent 1px), linear-gradient(to bottom, var(--text-primary) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+        aria-hidden="true"
+      />
+
       <div className="container-px py-16 sm:py-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Headline, CTAs, Bot Card, Metrics */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+          {/* Left Column: Editorial Headline & Value Arguments */}
           <div className="lg:col-span-7 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0, ease: EXPO_OUT }}
+              transition={{ duration: 0.5, ease: EXPO_OUT }}
+              className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface/70 px-3.5 py-1 mb-6 backdrop-blur-md shadow-xs"
             >
-              <span className="badge badge-brand mb-6 py-1 px-3.5 shadow-xs border border-subtle inline-flex">
-                <ShieldCheck className="h-3.5 w-3.5 text-trust" />
-                AI-guided · Rules-backed · 4.9★ from 12,000 filers
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-cta" />
+              <span className="font-mono text-[11px] font-semibold text-secondary uppercase tracking-widest">
+                Tax Year 2026 Active · Zero Upsell Policy
               </span>
             </motion.div>
 
-            <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl leading-[1.1]">
-              The tax plan that actually fits your life.
+            <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl leading-[1.08] max-w-[18ch] mx-auto lg:mx-0">
+              Taxes are code. Stop letting software sell you fear.
             </h1>
 
-            <p className="mt-6 text-base sm:text-lg text-secondary leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Answer five questions. Get a plan matched to your income, deductions,
-              and how much help you want — with the reasoning spelled out.
+            <p className="mt-6 text-base sm:text-lg text-secondary leading-relaxed max-w-[62ch] mx-auto lg:mx-0">
+              Commercial tax platforms push simple filers into $120+ bundles through artificial audit anxiety.
+              TaxWise evaluates your actual filing forms—Form 1040, Schedule C, or Form 1120-S—giving you the
+              statutory justification for every dollar.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
-              <Button asChild variant="cta" size="lg" className="shadow-lg hover:shadow-xl">
+              <Button asChild variant="cta" size="lg" className="shadow-lg hover:shadow-xl font-bold">
                 <Link href="/recommend">
-                  Find my plan
+                  Run 2-Minute Matcher
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="shadow-sm hover:shadow-md">
-                <Link href="/compare">Compare all plans</Link>
+              <Button asChild variant="secondary" size="lg" className="shadow-sm hover:shadow-md font-semibold">
+                <Link href="/compare">Inspect Plan Matrix</Link>
               </Button>
             </div>
 
-            {/* AI Bot helper card */}
+            {/* Technical Specification Strip */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.24, ease: EXPO_OUT }}
-              className="mt-6 inline-flex items-center gap-3 glass-2 rounded-2xl p-2.5 pr-4 shadow-sm"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface/80 border border-border shadow-inner shrink-0">
-                <BotFaceSVG size={36} />
-              </div>
-              <p className="text-xs text-secondary text-left">
-                Your AI helper.{" "}
-                <Link href="/assistant" className="font-semibold text-accent hover:underline">
-                  Ask it anything &rarr;
-                </Link>
-              </p>
-            </motion.div>
-
-            {/* Trust row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.6, delay: 0.3, ease: EXPO_OUT }}
-              className="mt-10 grid grid-cols-3 divide-x divide-subtle border-t border-subtle pt-6 text-center lg:text-left"
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: EXPO_OUT }}
+              className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-border-subtle pt-6 text-left"
             >
-              <div className="pr-3">
-                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary">
-                  <CheckCircle2 className="h-4 w-4 text-accent-success shrink-0" />
-                  <span className="truncate"><AnimatedCounter value={2341} /> filers</span>
+              <div className="rounded-xl border border-border-subtle/80 bg-surface/40 p-3">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-primary">
+                  <Terminal className="h-3.5 w-3.5 text-accent-primary" />
+                  <span>DETERMINISTIC</span>
                 </div>
-                <p className="mt-0.5 text-[11px] text-secondary">Matched this month</p>
+                <p className="mt-1 text-[11px] text-secondary leading-normal">
+                  Zero black-box AI guessing. Rules match strict IRS schedule thresholds.
+                </p>
               </div>
-              <div className="px-3">
-                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary">
-                  <Clock className="h-4 w-4 text-accent-success shrink-0" />
-                  <span className="truncate"><AnimatedCounter value={2} suffix=" min" /></span>
+
+              <div className="rounded-xl border border-border-subtle/80 bg-surface/40 p-3">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-primary">
+                  <FileCode2 className="h-3.5 w-3.5 text-accent-cta" />
+                  <span>IRS SCHEDULES</span>
                 </div>
-                <p className="mt-0.5 text-[11px] text-secondary">Instant questionnaire</p>
+                <p className="mt-1 text-[11px] text-secondary leading-normal">
+                  Complete mapping from Form 1040 simple to Form 1120-S corporate pass-through.
+                </p>
               </div>
-              <div className="pl-3">
-                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary">
-                  <ShieldCheck className="h-4 w-4 text-accent-success shrink-0" />
-                  <span className="truncate">Zero retention</span>
+
+              <div className="rounded-xl border border-border-subtle/80 bg-surface/40 p-3">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-primary">
+                  <Lock className="h-3.5 w-3.5 text-accent-success" />
+                  <span>ANONYMOUS</span>
                 </div>
-                <p className="mt-0.5 text-[11px] text-secondary">Client anonymous</p>
+                <p className="mt-1 text-[11px] text-secondary leading-normal">
+                  In-memory browser evaluation. Your income data is never saved to a database.
+                </p>
               </div>
             </motion.div>
           </div>
 
-          {/* Right Column: Hero Illustration & Product Mockup Card */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-            <div className="relative w-full max-w-[420px] flex flex-col items-center">
-              {/* SVG Transform Illustration */}
-              <HeroIllustration className="w-full max-w-[340px] sm:max-w-[380px] h-auto drop-shadow-sm select-none" />
-              {/* Product Mockup Overlay Card */}
-              <div className="mt-[-60px] sm:mt-[-80px] w-full flex justify-center z-20">
-                <HeroMockupCard />
-              </div>
-            </div>
+          {/* Right Column: Live Interactive Simulator Focal Point */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <InteractiveHeroSimulator />
           </div>
         </div>
       </div>
