@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Terminal, FileCode2, Lock } from "lucide-react";
+import { ArrowRight, Terminal, FileCode2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import FloatingMathBackground from "./FloatingMathBackground";
 import HeroFloatingShapes from "./HeroFloatingShapes";
 import InteractiveHeroSimulator from "./InteractiveHeroSimulator";
 
@@ -13,7 +12,6 @@ const EXPO_OUT = [0.22, 1, 0.36, 1] as const;
 export default function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-subtle bg-base">
-      <FloatingMathBackground />
       <HeroFloatingShapes />
 
       {/* Subtle Architectural Grid Lines */}
@@ -35,7 +33,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: EXPO_OUT }}
-              className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface/70 px-3.5 py-1 mb-6 backdrop-blur-md shadow-xs"
+              className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface px-3.5 py-1 mb-6 shadow-xs"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-accent-cta" />
               <span className="font-mono text-[11px] font-semibold text-secondary uppercase tracking-widest">
@@ -43,7 +41,7 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl leading-[1.08] max-w-[18ch] mx-auto lg:mx-0">
+            <h1 className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl leading-[1.08] max-w-[18ch] mx-auto lg:mx-0 font-display">
               Taxes are code. Stop letting software sell you fear.
             </h1>
 
@@ -65,40 +63,55 @@ export default function Hero() {
               </Button>
             </div>
 
-            {/* Technical Specification Strip */}
+            {/* Technical Specification Strip — Solid, High-Contrast Cards */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: EXPO_OUT }}
-              className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-border-subtle pt-6 text-left"
+              className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3.5 border-t border-border-subtle pt-6 text-left"
             >
-              <div className="rounded-xl border border-border-subtle/80 bg-surface/40 p-3">
-                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-primary">
-                  <Terminal className="h-3.5 w-3.5 text-accent-primary" />
-                  <span>DETERMINISTIC</span>
+              <div className="rounded-xl border border-border-default bg-surface p-4 shadow-xs hover:border-border-strong transition-colors">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-primary">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-accent-primary/10 border border-accent-primary/25 shrink-0">
+                    <Terminal className="h-3.5 w-3.5 text-accent-primary" />
+                  </span>
+                  <span style={{ color: "var(--text-primary)" }}>DETERMINISTIC</span>
                 </div>
-                <p className="mt-1 text-[11px] text-secondary leading-normal">
+                <p
+                  style={{ color: "var(--text-secondary)" }}
+                  className="mt-2 text-xs text-secondary leading-relaxed font-medium"
+                >
                   Zero black-box AI guessing. Rules match strict IRS schedule thresholds.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border-subtle/80 bg-surface/40 p-3">
-                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-primary">
-                  <FileCode2 className="h-3.5 w-3.5 text-accent-cta" />
-                  <span>IRS SCHEDULES</span>
+              <div className="rounded-xl border border-border-default bg-surface p-4 shadow-xs hover:border-border-strong transition-colors">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-primary">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-accent-cta/10 border border-accent-cta/25 shrink-0">
+                    <FileCode2 className="h-3.5 w-3.5 text-accent-cta" />
+                  </span>
+                  <span style={{ color: "var(--text-primary)" }}>IRS SCHEDULES</span>
                 </div>
-                <p className="mt-1 text-[11px] text-secondary leading-normal">
+                <p
+                  style={{ color: "var(--text-secondary)" }}
+                  className="mt-2 text-xs text-secondary leading-relaxed font-medium"
+                >
                   Complete mapping from Form 1040 simple to Form 1120-S corporate pass-through.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border-subtle/80 bg-surface/40 p-3">
-                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-primary">
-                  <Lock className="h-3.5 w-3.5 text-accent-success" />
-                  <span>ANONYMOUS</span>
+              <div className="rounded-xl border border-border-default bg-surface p-4 shadow-xs hover:border-border-strong transition-colors">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-primary">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-accent-success/10 border border-accent-success/25 shrink-0">
+                    <Lock className="h-3.5 w-3.5 text-accent-success" />
+                  </span>
+                  <span style={{ color: "var(--text-primary)" }}>ANONYMOUS</span>
                 </div>
-                <p className="mt-1 text-[11px] text-secondary leading-normal">
+                <p
+                  style={{ color: "var(--text-secondary)" }}
+                  className="mt-2 text-xs text-secondary leading-relaxed font-medium"
+                >
                   In-memory browser evaluation. Your income data is never saved to a database.
                 </p>
               </div>
